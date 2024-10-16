@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "es2016",
+    "jsx": "react-jsx", // Change this to 'react-jsx' for React 17+ to enable new JSX transform
+
+    /* Modules */
+    "module": "commonjs",
+
+    /* Interop Constraints */
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true, // Allows importing default exports from modules with no default export
+
+    /* Type Checking */
+    "strict": true,
+    "skipLibCheck": true // Skips type checking for all .d.ts files
+  }
+}

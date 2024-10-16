@@ -1,9 +1,12 @@
 import "./App.css";
+import TaskBox from "./components/TaskBox";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header"></header>
+      <header className="App-header">
+        <TaskBox />
+      </header>
     </div>
   );
 }
