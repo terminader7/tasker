@@ -1,5 +1,5 @@
 // src/index.tsx
-import React, { useState } from "react";
+import { useState } from "react";
 import ReactDOM from "react-dom/client";
 import TaskApp from "./App";
 import { CssBaseline, useMediaQuery } from "@mui/material";
@@ -13,18 +13,6 @@ const Index = () => {
 
   const theme = createTheme(getThemeOptions(primaryColor, secondaryColor));
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
-
-  const handleChangePrimaryColor = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setPrimaryColor(event.target.value);
-  };
-
-  const handleChangeSecondaryColor = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setSecondaryColor(event.target.value);
-  };
 
   return (
     <ThemeProvider theme={theme}>
