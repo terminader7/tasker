@@ -1,3 +1,5 @@
 com\example\tasker\repository\TaskRepository.class
 com\example\tasker\App.class
 com\example\tasker\model\Task.class
+com\example\tasker\service\TaskService.class
+com\example\tasker\controller\TaskController.class
