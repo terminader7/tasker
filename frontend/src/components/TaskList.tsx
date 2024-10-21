@@ -19,7 +19,8 @@ const TaskList = () => {
           justifyContent: "center",
         }}
       >
-        <TaskItem />
+        <TaskItem text="Task 1" />
+        <TaskItem text="Task 2" />
       </ListItem>
     </List>
   );

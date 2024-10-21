@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 
-const TaskItem = () => {
+const TaskItem = ({ text }: { text: string }) => {
   return (
     <Box
       sx={{
@@ -12,7 +12,7 @@ const TaskItem = () => {
         justifyContent: "center",
       }}
     >
-      <Typography>Hello</Typography>
+      <Typography>{text}</Typography>
     </Box>
   );
 };
