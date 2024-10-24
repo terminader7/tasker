@@ -1,5 +1,5 @@
-C:\Users\Nader Ebrahim\Desktop\Programming\tasker\backend\src\main\java\com\example\tasker\App.java
-C:\Users\Nader Ebrahim\Desktop\Programming\tasker\backend\src\main\java\com\example\tasker\TaskController.java
-C:\Users\Nader Ebrahim\Desktop\Programming\tasker\backend\src\main\java\com\example\tasker\TaskService.java
-C:\Users\Nader Ebrahim\Desktop\Programming\tasker\backend\src\main\java\com\example\tasker\TaskRepository.java
-C:\Users\Nader Ebrahim\Desktop\Programming\tasker\backend\src\main\java\com\example\tasker\Task.java
+C:\Users\Nader Ebrahim\Desktop\Programming\tasker\backend\src\main\java\com\example\tasker\service\TaskService.java
+C:\Users\Nader Ebrahim\Desktop\Programming\tasker\backend\src\main\java\com\example\tasker\repository\TaskRepository.java
+C:\Users\Nader Ebrahim\Desktop\Programming\tasker\backend\src\main\java\com\example\tasker\controller\TaskController.java
+C:\Users\Nader Ebrahim\Desktop\Programming\tasker\backend\src\main\java\com\example\tasker\TaskerApplication.java
+C:\Users\Nader Ebrahim\Desktop\Programming\tasker\backend\src\main\java\com\example\tasker\model\Task.java
