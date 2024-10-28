@@ -2,7 +2,6 @@ package com.example.tasker.model;
 
 import jakarta.persistence.*;
 
-
 import java.time.LocalDateTime;
 
 
