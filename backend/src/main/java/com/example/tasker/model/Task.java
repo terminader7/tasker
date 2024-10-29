@@ -41,6 +41,10 @@ public class Task {
         this.dueDate = dueDate;
     }
 
+    // GETTERS AND SETTERS
+
+    public Long getId() {return id;}
+
     public String getTitle() {return title;}
     public void setTitle(String title) {this.title = title;}
 
