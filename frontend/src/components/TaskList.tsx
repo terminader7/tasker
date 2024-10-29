@@ -1,8 +1,26 @@
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import TaskItem from "./TaskItem";
+import { getTasks } from "../api/taskService";
+import { useEffect, useState } from "react";
+import { Task } from "../types/task";
+import Typography from "@mui/material/Typography";
 
 const TaskList = () => {
+  const [tasks, setTasks] = useState<Task[]>([]);
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const data = await getTasks();
+        setTasks(data);
+      } catch (error) {
+        console.error("Error fetching tasks", error);
+      }
+    };
+
+    fetchTasks();
+  }, []);
   return (
     <List
       sx={{
@@ -19,8 +37,13 @@ const TaskList = () => {
           justifyContent: "center",
         }}
       >
-        <TaskItem text="Task 1" />
-        <TaskItem text="Task 2" />
+        {tasks.length > 0 ? (
+          tasks.map((task: Task) => <TaskItem key={task.id} task={task} />)
+        ) : (
+          <ListItem>
+            <Typography>No tasks available</Typography>
+          </ListItem>
+        )}
       </ListItem>
     </List>
   );

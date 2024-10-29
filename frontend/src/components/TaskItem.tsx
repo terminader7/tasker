@@ -1,7 +1,11 @@
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
+import { Task } from "../types/task";
+import { useTheme } from "@mui/material/styles";
 
-const TaskItem = ({ text }: { text: string }) => {
+const TaskItem = ({ task }: { task: Task }) => {
+  const theme = useTheme();
+
   return (
     <Box
       sx={{
@@ -10,9 +14,11 @@ const TaskItem = ({ text }: { text: string }) => {
         border: "2px solid",
         borderRadius: "5px",
         justifyContent: "center",
+        backgroundColor: theme.palette.secondary.main,
       }}
     >
-      <Typography>{text}</Typography>
+      <Typography color="black">{task.title}</Typography>
+      {task.description && <Typography>{task.description}</Typography>}
     </Box>
   );
 };
