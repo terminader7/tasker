@@ -1,7 +1,7 @@
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import TaskItem from "./TaskItem";
-import { getTasks } from "../api/taskService";
+import { deleteTask, getTasks } from "../api/taskService";
 import { useEffect, useState } from "react";
 import { Task } from "../types/task";
 import Typography from "@mui/material/Typography";
@@ -21,6 +21,16 @@ const TaskList = () => {
 
     fetchTasks();
   }, []);
+
+  const handleDelete = async (id: Task["id"]) => {
+    try {
+      await deleteTask(id);
+      setTasks(tasks.filter((task) => task.id !== id));
+    } catch (error) {
+      console.error("Error deleting task", error);
+    }
+  };
+
   return (
     <List
       sx={{
@@ -38,7 +48,13 @@ const TaskList = () => {
         }}
       >
         {tasks.length > 0 ? (
-          tasks.map((task: Task) => <TaskItem key={task.id} task={task} />)
+          tasks.map((task: Task) => (
+            <TaskItem
+              key={task.id}
+              task={task}
+              onDelete={() => handleDelete(task.id)}
+            />
+          ))
         ) : (
           <ListItem>
             <Typography>No tasks available</Typography>

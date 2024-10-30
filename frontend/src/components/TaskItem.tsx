@@ -1,9 +1,10 @@
 import Box from "@mui/material/Box";
-import { Typography } from "@mui/material";
+import { IconButton, Typography } from "@mui/material";
 import { Task } from "../types/task";
 import { useTheme } from "@mui/material/styles";
+import ClearIcon from "@mui/icons-material/Clear";
 
-const TaskItem = ({ task }: { task: Task }) => {
+const TaskItem = ({ task, onDelete }: { task: Task; onDelete: () => void }) => {
   const theme = useTheme();
 
   return (
@@ -14,11 +15,22 @@ const TaskItem = ({ task }: { task: Task }) => {
         border: "2px solid",
         borderRadius: "5px",
         justifyContent: "center",
-        backgroundColor: theme.palette.secondary.main,
+        flexDirection: "column",
+        backgroundColor: theme.palette.primary.main,
       }}
     >
-      <Typography color="black">{task.title}</Typography>
-      {task.description && <Typography>{task.description}</Typography>}
+      <IconButton
+        sx={{
+          alignSelf: "flex-end",
+        }}
+        onClick={onDelete}
+      >
+        <ClearIcon />
+      </IconButton>
+      <Typography fontWeight={600}>{task.title}</Typography>
+      {task.description && (
+        <Typography variant="body1">{task.description}</Typography>
+      )}
     </Box>
   );
 };
