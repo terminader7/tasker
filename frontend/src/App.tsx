@@ -9,11 +9,16 @@ const TaskApp = () => {
   return (
     <Box
       sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
         backgroundColor: theme.palette.background.default,
         minHeight: "100vh",
       }}
     >
-      <Typography variant="h1">Welcome to the Task Manager</Typography>
+      <Typography variant="h1" textAlign="center">
+        Welcome to the Task Manager
+      </Typography>
       <TaskList />
       <TaskCreator />
     </Box>

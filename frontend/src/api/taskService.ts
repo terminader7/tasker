@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Task } from "../types/task";
+import { NewTask, Task } from "../types/task";
 
 const API_URL = "http://localhost:8080/api/tasks";
 
@@ -16,7 +16,7 @@ export const getTask = async (id: number) => {
 };
 
 // Create a new task
-export const createTask = async (task: Task) => {
+export const createTask = async (task: NewTask) => {
   const response = await axios.post(API_URL, task);
   return response.data;
 };
