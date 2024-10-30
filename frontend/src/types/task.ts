@@ -9,7 +9,7 @@ export interface Task {
   title: string;
   description?: string;
   status: TaskStatus;
-  dueDate?: string;
+  dueDate?: Date | null;
 }
 
 export type NewTask = Omit<Task, "id">;

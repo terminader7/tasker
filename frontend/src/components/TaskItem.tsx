@@ -31,6 +31,11 @@ const TaskItem = ({ task, onDelete }: { task: Task; onDelete: () => void }) => {
       {task.description && (
         <Typography variant="body1">{task.description}</Typography>
       )}
+      {task.dueDate && (
+        <Typography variant="body2">
+          Due: {new Date(task.dueDate).toLocaleDateString()}
+        </Typography>
+      )}
     </Box>
   );
 };

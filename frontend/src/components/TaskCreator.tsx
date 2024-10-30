@@ -5,6 +5,9 @@ import { useState } from "react";
 import { createTask } from "../api/taskService";
 import ClearIcon from "@mui/icons-material/Clear";
 import { TaskStatus, NewTask } from "../types/task";
+import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { DateTime } from "luxon";
+import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
 
 const TaskCreator = () => {
   const theme = useTheme();
@@ -12,7 +15,7 @@ const TaskCreator = () => {
   const [task, setTask] = useState<NewTask>({
     title: "",
     description: "",
-    dueDate: "",
+    dueDate: null,
     status: TaskStatus.TODO,
   });
 
@@ -22,7 +25,7 @@ const TaskCreator = () => {
       setTask({
         title: "",
         description: "",
-        dueDate: "",
+        dueDate: null,
         status: TaskStatus.TODO,
       });
       setShowForm(false);
@@ -32,73 +35,78 @@ const TaskCreator = () => {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      {showForm && (
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            width: "20rem",
-            gap: "1rem",
-          }}
-        >
-          <IconButton
+    <LocalizationProvider dateAdapter={AdapterLuxon}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        {showForm && (
+          <Box
             sx={{
-              alignSelf: "flex-end",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              width: "20rem",
+              gap: "1rem",
             }}
-            onClick={() => setShowForm(!showForm)}
           >
-            <ClearIcon />
-          </IconButton>
-          <Input
-            placeholder="Task title"
-            onChange={(e) => {
-              setTask({ ...task, title: e.target.value });
-            }}
-          />
-          <Input
-            placeholder="Task Description"
-            onChange={(e) => {
-              setTask({ ...task, description: e.target.value });
-            }}
-          />
-          <Input
-            placeholder="Due Date"
-            onChange={(e) => {
-              setTask({ ...task, dueDate: e.target.value });
-            }}
-          />
+            <IconButton
+              sx={{
+                alignSelf: "flex-end",
+              }}
+              onClick={() => setShowForm(!showForm)}
+            >
+              <ClearIcon />
+            </IconButton>
+            <Input
+              placeholder="Task title"
+              onChange={(e) => {
+                setTask({ ...task, title: e.target.value });
+              }}
+            />
+            <Input
+              placeholder="Task Description"
+              onChange={(e) => {
+                setTask({ ...task, description: e.target.value });
+              }}
+            />
+            <DateTimePicker
+              label="Due Date (Optional)"
+              value={
+                task.dueDate ? DateTime.fromISO(task.dueDate.toString()) : null
+              }
+              onChange={(date) => {
+                setTask({ ...task, dueDate: date ? date.toJSDate() : null });
+              }}
+            />
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: theme.palette.primary.main,
+              }}
+              onClick={handleAddTask}
+            >
+              Add Task
+            </Button>
+          </Box>
+        )}
+        {!showForm && (
           <Button
             variant="contained"
             sx={{
               backgroundColor: theme.palette.primary.main,
             }}
-            onClick={handleAddTask}
+            onClick={() => setShowForm(!showForm)}
           >
-            Add Task
+            Create Task
           </Button>
-        </Box>
-      )}
-      {!showForm && (
-        <Button
-          variant="contained"
-          sx={{
-            backgroundColor: theme.palette.primary.main,
-          }}
-          onClick={() => setShowForm(!showForm)}
-        >
-          Create Task
-        </Button>
-      )}
-    </Box>
+        )}
+      </Box>
+    </LocalizationProvider>
   );
 };
 
