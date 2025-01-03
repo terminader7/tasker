@@ -76,6 +76,7 @@ public class Task {
     @PrePersist
     protected void OnCreate() {
         this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now(); // Just to give an initial set up to updated at
     }
 
     // PreUpdate updates the upedatedat time whenever the record is modified
