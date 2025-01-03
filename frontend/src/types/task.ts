@@ -10,6 +10,8 @@ export interface Task {
   description?: string;
   status: TaskStatus;
   dueDate?: Date | null;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export type NewTask = Omit<Task, "id">;

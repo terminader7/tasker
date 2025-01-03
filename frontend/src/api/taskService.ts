@@ -22,7 +22,7 @@ export const createTask = async (task: NewTask) => {
 };
 
 // Update a task
-export const updateTask = async (id: number, task: Task) => {
+export const updateTask = async (id: number, task: Partial<Task>) => {
   const response = await axios.put(`${API_URL}/${id}`, task);
   return response.data;
 };

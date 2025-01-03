@@ -17,6 +17,8 @@ const TaskCreator = () => {
     description: "",
     dueDate: null,
     status: TaskStatus.TODO,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   });
 
   const handleAddTask = async () => {
@@ -27,6 +29,8 @@ const TaskCreator = () => {
         description: "",
         dueDate: null,
         status: TaskStatus.TODO,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       });
       setShowForm(false);
     } catch (error) {
