@@ -4,12 +4,16 @@ import { useTheme } from "@mui/material/styles";
 import { useState } from "react";
 import { createTask } from "../api/taskService";
 import ClearIcon from "@mui/icons-material/Clear";
-import { TaskStatus, NewTask } from "../types/task";
+import { TaskStatus, NewTask, Task } from "../types/task";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { DateTime } from "luxon";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
 
-const TaskCreator = () => {
+const TaskCreator = ({
+  onTaskCreated,
+}: {
+  onTaskCreated: (task: Task) => void;
+}) => {
   const theme = useTheme();
   const [showForm, setShowForm] = useState(false);
   const [task, setTask] = useState<NewTask>({
@@ -23,7 +27,8 @@ const TaskCreator = () => {
 
   const handleAddTask = async () => {
     try {
-      await createTask(task);
+      const newTask = await createTask(task);
+      onTaskCreated(newTask);
       setTask({
         title: "",
         description: "",

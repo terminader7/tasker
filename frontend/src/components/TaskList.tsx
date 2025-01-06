@@ -5,6 +5,8 @@ import { deleteTask, getTasks } from "../api/taskService";
 import { useEffect, useState } from "react";
 import { Task } from "../types/task";
 import Typography from "@mui/material/Typography";
+import TaskCreator from "./TaskCreator";
+import { Box } from "@mui/material";
 
 const TaskList = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -31,37 +33,50 @@ const TaskList = () => {
     }
   };
 
+  const handleTaskCreated = (newTask: Task) => {
+    setTasks((prevTasks) => [...prevTasks, newTask]);
+  };
+
   return (
-    <List
+    <Box
       sx={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        width: "100%",
       }}
     >
-      <ListItem
+      <List
         sx={{
           display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
           width: "100%",
-          justifyContent: "center",
         }}
       >
-        {tasks.length > 0 ? (
-          tasks.map((task: Task) => (
-            <TaskItem
-              key={task.id}
-              task={task}
-              onDelete={() => handleDelete(task.id)}
-            />
-          ))
-        ) : (
-          <ListItem>
-            <Typography>No tasks available</Typography>
-          </ListItem>
-        )}
-      </ListItem>
-    </List>
+        <ListItem
+          sx={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "center",
+          }}
+        >
+          {tasks.length > 0 ? (
+            tasks.map((task: Task) => (
+              <TaskItem
+                key={task.id}
+                task={task}
+                onDelete={() => handleDelete(task.id)}
+              />
+            ))
+          ) : (
+            <ListItem>
+              <Typography>No tasks available</Typography>
+            </ListItem>
+          )}
+        </ListItem>
+      </List>
+      <TaskCreator onTaskCreated={handleTaskCreated} />
+    </Box>
   );
 };
 

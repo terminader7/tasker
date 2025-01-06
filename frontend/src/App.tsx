@@ -1,7 +1,6 @@
 // src/App.tsx
 import { Box, Typography } from "@mui/material";
 import TaskList from "./components/TaskList";
-import TaskCreator from "./components/TaskCreator";
 import { useTheme } from "@mui/material/styles";
 
 const TaskApp = () => {
@@ -20,7 +19,6 @@ const TaskApp = () => {
         Welcome to the Task Manager
       </Typography>
       <TaskList />
-      <TaskCreator />
     </Box>
   );
 };
