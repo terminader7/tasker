@@ -7,9 +7,11 @@ import { Task } from "../types/task";
 import Typography from "@mui/material/Typography";
 import TaskCreator from "./TaskCreator";
 import { Box } from "@mui/material";
+import { useSnackbar } from "notistack";
 
 const TaskList = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -28,8 +30,14 @@ const TaskList = () => {
     try {
       await deleteTask(id);
       setTasks(tasks.filter((task) => task.id !== id));
+      enqueueSnackbar("Task deleted", {
+        variant: "success",
+      });
     } catch (error) {
       console.error("Error deleting task", error);
+      enqueueSnackbar("Failed to delete task", {
+        variant: "error",
+      });
     }
   };
 

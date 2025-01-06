@@ -8,6 +8,7 @@ import { TaskStatus, NewTask, Task } from "../types/task";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { DateTime } from "luxon";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
+import { useSnackbar } from "notistack";
 
 const TaskCreator = ({
   onTaskCreated,
@@ -15,6 +16,7 @@ const TaskCreator = ({
   onTaskCreated: (task: Task) => void;
 }) => {
   const theme = useTheme();
+  const { enqueueSnackbar } = useSnackbar();
   const [showForm, setShowForm] = useState(false);
   const [task, setTask] = useState<NewTask>({
     title: "",
@@ -38,7 +40,13 @@ const TaskCreator = ({
         updatedAt: new Date(),
       });
       setShowForm(false);
+      enqueueSnackbar("Task created!", {
+        variant: "success",
+      });
     } catch (error) {
+      enqueueSnackbar("Failed to create task", {
+        variant: "error",
+      });
       console.error("Error creating task", error);
     }
   };
