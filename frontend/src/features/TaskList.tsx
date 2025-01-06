@@ -50,22 +50,20 @@ const TaskList = () => {
       sx={{
         display: "flex",
         flexDirection: "column",
+        justifyContent: "center",
         alignItems: "center",
       }}
     >
       <List
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          width: "100%",
+          backgroundColor: "green",
         }}
       >
         <ListItem
           sx={{
             display: "flex",
             width: "100%",
-            justifyContent: "center",
+            gap: "5rem",
           }}
         >
           {tasks.length > 0 ? (

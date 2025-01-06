@@ -25,16 +25,18 @@ const TaskItem = ({ task, onDelete }: { task: Task; onDelete: () => void }) => {
       sx={{
         display: "flex",
         width: "15rem",
+        height: "15rem",
         border: "2px solid",
         borderRadius: "5px",
-        justifyContent: "center",
         flexDirection: "column",
-        backgroundColor: theme.palette.primary.main,
+        gap: "1rem",
+        backgroundColor: theme.palette.common.white,
       }}
     >
       <IconButton
         sx={{
           alignSelf: "flex-end",
+          posiiton: "fixed",
         }}
         onClick={onDelete}
       >
@@ -57,20 +59,29 @@ const TaskItem = ({ task, onDelete }: { task: Task; onDelete: () => void }) => {
           variant="body2"
           sx={{ color: "secondary.main", fontWeight: 600 }}
         >
-          Due: {new Date(task.createdAt).toLocaleDateString()}
+          Created on: {new Date(task.createdAt).toLocaleDateString()}
         </Typography>
       )}
-      <Button
+      <Box
         sx={{
-          color: "primary.contrastText",
-          backgroundColor: "secondary.main",
-        }}
-        onClick={() => {
-          setShowUpdateForm(true);
+          display: "flex",
+          justifyContent: "center",
         }}
       >
-        Update
-      </Button>
+        <Button
+          sx={{
+            color: "primary.contrastText",
+            backgroundColor: "secondary.main",
+            position: "absolute",
+            bottom: 15,
+          }}
+          onClick={() => {
+            setShowUpdateForm(true);
+          }}
+        >
+          Update
+        </Button>
+      </Box>
       {showUpdateForm && <UpdateTaskForm task={task} onUpdate={handleUpdate} />}
     </Box>
   );

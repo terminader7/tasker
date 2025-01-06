@@ -1,6 +1,6 @@
 // src/App.tsx
 import { Box, Typography } from "@mui/material";
-import TaskList from "./components/TaskList";
+import TaskList from "./features/TaskList";
 import { useTheme } from "@mui/material/styles";
 
 const TaskApp = () => {

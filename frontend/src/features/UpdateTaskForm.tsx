@@ -1,6 +1,7 @@
 import { Box, Button, TextField } from "@mui/material";
 import { useState } from "react";
 import { Task } from "../types/task";
+import InlineContainer from "../components/InlineContainer";
 
 const UpdateTaskForm = ({
   task,
@@ -40,16 +41,26 @@ const UpdateTaskForm = ({
         value={updatedTask.dueDate}
         onChange={(e) => handleInputChange("dueDate", e.target.value)}
       />
-
-      <Button
-        sx={{
-          color: "primary.contrastText",
-          backgroundColor: "secondary.main",
-        }}
-        onClick={handleSubmit}
-      >
-        Save Changes
-      </Button>
+      <InlineContainer>
+        <Button
+          sx={{
+            color: "primary.contrastText",
+            backgroundColor: "secondary.main",
+          }}
+          onClick={handleSubmit}
+        >
+          Cancel
+        </Button>
+        <Button
+          sx={{
+            color: "primary.contrastText",
+            backgroundColor: "primary.main",
+          }}
+          onClick={handleSubmit}
+        >
+          Save Changes
+        </Button>
+      </InlineContainer>
     </Box>
   );
 };
