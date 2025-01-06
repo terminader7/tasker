@@ -2,13 +2,16 @@ import { Box, Button, TextField } from "@mui/material";
 import { useState } from "react";
 import { Task } from "../types/task";
 import InlineContainer from "../components/InlineContainer";
+import { set } from "date-fns";
 
 const UpdateTaskForm = ({
   task,
   onUpdate,
+  setShowUpdateForm,
 }: {
   task: Task;
   onUpdate: (updatedTask: Partial<Task>) => void;
+  setShowUpdateForm: any;
 }) => {
   const [updatedTask, setUpdatedTask] = useState<Partial<Task>>({
     title: task.title,
@@ -47,7 +50,9 @@ const UpdateTaskForm = ({
             color: "primary.contrastText",
             backgroundColor: "secondary.main",
           }}
-          onClick={handleSubmit}
+          onClick={() => {
+            setShowUpdateForm(false);
+          }}
         >
           Cancel
         </Button>

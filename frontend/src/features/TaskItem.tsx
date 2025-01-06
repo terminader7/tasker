@@ -82,7 +82,13 @@ const TaskItem = ({ task, onDelete }: { task: Task; onDelete: () => void }) => {
           Update
         </Button>
       </Box>
-      {showUpdateForm && <UpdateTaskForm task={task} onUpdate={handleUpdate} />}
+      {showUpdateForm && (
+        <UpdateTaskForm
+          task={task}
+          onUpdate={handleUpdate}
+          setShowUpdateForm={setShowUpdateForm}
+        />
+      )}
     </Box>
   );
 };
