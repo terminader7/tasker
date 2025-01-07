@@ -2,6 +2,7 @@
 import { Box, Typography } from "@mui/material";
 import TaskList from "./features/TaskList";
 import { useTheme } from "@mui/material/styles";
+import PrimaryNavigation from "./components/PrimaryNavigation";
 
 const TaskApp = () => {
   const theme = useTheme();
@@ -9,15 +10,13 @@ const TaskApp = () => {
     <Box
       sx={{
         display: "flex",
-        flexDirection: "column",
+        flexDirection: "row",
         justifyContent: "center",
         backgroundColor: theme.palette.background.default,
         minHeight: "100vh",
       }}
     >
-      <Typography variant="h1" textAlign="center">
-        Welcome to the Task Manager
-      </Typography>
+      <PrimaryNavigation />
       <TaskList />
     </Box>
   );
