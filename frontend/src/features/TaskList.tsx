@@ -54,34 +54,29 @@ const TaskList = () => {
         alignItems: "center",
       }}
     >
+      <TaskCreator onTaskCreated={handleTaskCreated} />
       <List
         sx={{
-          backgroundColor: "green",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
-        <ListItem
-          sx={{
-            display: "flex",
-            width: "100%",
-            gap: "5rem",
-          }}
-        >
-          {tasks.length > 0 ? (
-            tasks.map((task: Task) => (
+        {tasks.length > 0 ? (
+          tasks.map((task: Task) => (
+            <ListItem>
               <TaskItem
                 key={task.id}
                 task={task}
                 onDelete={() => handleDelete(task.id)}
               />
-            ))
-          ) : (
-            <ListItem>
-              <Typography>No tasks available</Typography>
             </ListItem>
-          )}
-        </ListItem>
+          ))
+        ) : (
+          <ListItem>
+            <Typography>No tasks available</Typography>
+          </ListItem>
+        )}
       </List>
-      <TaskCreator onTaskCreated={handleTaskCreated} />
     </Box>
   );
 };

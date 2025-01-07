@@ -24,13 +24,11 @@ const TaskItem = ({ task, onDelete }: { task: Task; onDelete: () => void }) => {
     <Box
       sx={{
         display: "flex",
-        width: "15rem",
-        height: "15rem",
-        border: "2px solid",
         borderRadius: "5px",
-        flexDirection: "column",
         gap: "1rem",
         backgroundColor: theme.palette.common.white,
+        padding: "1rem",
+        width: "100%",
       }}
     >
       <IconButton
@@ -69,19 +67,21 @@ const TaskItem = ({ task, onDelete }: { task: Task; onDelete: () => void }) => {
           justifyContent: "center",
         }}
       >
-        <Button
-          sx={{
-            color: "primary.contrastText",
-            backgroundColor: "secondary.main",
-            position: "absolute",
-            bottom: 15,
-          }}
-          onClick={() => {
-            setShowUpdateForm(true);
-          }}
-        >
-          Update
-        </Button>
+        {!showUpdateForm && (
+          <Button
+            sx={{
+              color: "primary.contrastText",
+              backgroundColor: "secondary.main",
+              position: "fixed",
+              alignSelf: "flex-end",
+            }}
+            onClick={() => {
+              setShowUpdateForm(true);
+            }}
+          >
+            Update
+          </Button>
+        )}
       </Box>
       {showUpdateForm && (
         <UpdateTaskForm
