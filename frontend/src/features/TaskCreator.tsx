@@ -1,4 +1,12 @@
-import { Box, IconButton, Input } from "@mui/material";
+import {
+  Box,
+  FormControl,
+  IconButton,
+  Input,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
 import { Button } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useState } from "react";
@@ -84,8 +92,21 @@ const TaskCreator = ({
                 setTask({ ...task, title: e.target.value });
               }}
             />
+            <FormControl fullWidth>
+              <InputLabel>Status</InputLabel>
+              <Select
+                value={task.status}
+                onChange={(e) => {
+                  setTask({ ...task, status: e.target.value as TaskStatus });
+                }}
+              >
+                <MenuItem value={TaskStatus.TODO}>To Do</MenuItem>
+                <MenuItem value={TaskStatus.IN_PROGRESS}>In Progress</MenuItem>
+                <MenuItem value={TaskStatus.DONE}>Done</MenuItem>
+              </Select>
+            </FormControl>
             <Input
-              placeholder="Task Description"
+              placeholder="Task Description (Optional)"
               onChange={(e) => {
                 setTask({ ...task, description: e.target.value });
               }}

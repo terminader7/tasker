@@ -1,8 +1,16 @@
-import { Box, Button, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import { useState } from "react";
 import { Task } from "../types/task";
 import InlineContainer from "../components/InlineContainer";
-import { set } from "date-fns";
+import { TaskStatus } from "../types/task";
 
 const UpdateTaskForm = ({
   task,
@@ -39,6 +47,17 @@ const UpdateTaskForm = ({
         value={updatedTask.description}
         onChange={(e) => handleInputChange("description", e.target.value)}
       />
+      <FormControl fullWidth>
+        <InputLabel>Status</InputLabel>
+        <Select
+          value={updatedTask.status}
+          onChange={(e) => handleInputChange("status", e.target.value)}
+        >
+          <MenuItem value={TaskStatus.TODO}>To Do</MenuItem>
+          <MenuItem value={TaskStatus.IN_PROGRESS}>In Progress</MenuItem>
+          <MenuItem value={TaskStatus.DONE}>Done</MenuItem>
+        </Select>
+      </FormControl>
       <TextField
         label="Due Date"
         value={updatedTask.dueDate}

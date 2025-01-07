@@ -43,6 +43,7 @@ const TaskItem = ({ task, onDelete }: { task: Task; onDelete: () => void }) => {
         <ClearIcon />
       </IconButton>
       <Typography fontWeight={600}>{task.title}</Typography>
+      <Typography variant="body1">{task.status}</Typography>
       {task.description && (
         <Typography variant="body1">{task.description}</Typography>
       )}
