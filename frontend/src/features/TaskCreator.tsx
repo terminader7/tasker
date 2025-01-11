@@ -6,6 +6,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  Typography,
 } from "@mui/material";
 import { Button } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
@@ -66,6 +67,10 @@ const TaskCreator = ({
           display: "flex",
           flexDirection: "column",
           width: "fit-content",
+          padding: "1rem",
+          backgroundColor: theme.palette.background.paper,
+          borderRadius: "10px",
+          boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
         }}
       >
         {showForm && (
@@ -91,9 +96,16 @@ const TaskCreator = ({
               onChange={(e) => {
                 setTask({ ...task, title: e.target.value });
               }}
+              sx={{
+                width: "100%",
+              }}
             />
+            {/* Might be counter intutitive to allow the user to set the status, but I'm accounting for the rare case that someone completed a task before even creating it, and then they want to create said task just so they could keep track */}
             <FormControl fullWidth>
-              <InputLabel>Status</InputLabel>
+              <Typography fontWeight={600} fontSize="14px">
+                {" "}
+                Status
+              </Typography>
               <Select
                 value={task.status}
                 onChange={(e) => {
@@ -110,6 +122,9 @@ const TaskCreator = ({
               onChange={(e) => {
                 setTask({ ...task, description: e.target.value });
               }}
+              sx={{
+                width: "100%",
+              }}
             />
             <DateTimePicker
               label="Due Date (Optional)"
@@ -118,6 +133,9 @@ const TaskCreator = ({
               }
               onChange={(date) => {
                 setTask({ ...task, dueDate: date ? date.toJSDate() : null });
+              }}
+              sx={{
+                width: "100%",
               }}
             />
             <Button

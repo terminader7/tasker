@@ -6,6 +6,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import { useState } from "react";
 import { updateTask } from "../api/taskService";
 import UpdateTaskForm from "./UpdateTaskForm";
+import InlineContainer from "../components/InlineContainer";
 
 const TaskItem = ({ task, onDelete }: { task: Task; onDelete: () => void }) => {
   const theme = useTheme();
@@ -21,14 +22,13 @@ const TaskItem = ({ task, onDelete }: { task: Task; onDelete: () => void }) => {
   };
 
   return (
-    <Box
+    <InlineContainer
       sx={{
-        display: "flex",
         borderRadius: "5px",
         gap: "1rem",
         backgroundColor: theme.palette.common.white,
         padding: "1rem",
-        width: "100%",
+        boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
       }}
     >
       <IconButton
@@ -90,7 +90,7 @@ const TaskItem = ({ task, onDelete }: { task: Task; onDelete: () => void }) => {
           setShowUpdateForm={setShowUpdateForm}
         />
       )}
-    </Box>
+    </InlineContainer>
   );
 };
 
