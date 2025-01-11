@@ -56,7 +56,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
+        
         <!-- Lombok (Optional but useful for reducing boilerplate code) -->
         <dependency>
             <groupId>org.projectlombok</groupId>
