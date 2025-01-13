@@ -2,8 +2,11 @@ import { Box, Typography } from "@mui/material";
 import RightArrowIcon from "@mui/icons-material/ArrowForwardIos";
 import InlineContainer from "./InlineContainer";
 import AddBoxIcon from "@mui/icons-material/AddBox";
+import { useState } from "react";
+import ProjectCreator from "../features/ProjectCreator";
 
 const PrimaryNavigation = () => {
+  const [showForm, setShowForm] = useState(false);
   return (
     <Box
       sx={{
@@ -26,6 +29,7 @@ const PrimaryNavigation = () => {
         Tasker
       </Typography>
       <InlineContainer
+        onClick={() => setShowForm(!showForm)}
         sx={{
           "&:hover": {
             backgroundColor: "primary.light",
@@ -39,6 +43,7 @@ const PrimaryNavigation = () => {
           Create Project
         </Typography>
       </InlineContainer>
+      {showForm && <ProjectCreator />}
       <InlineContainer
         sx={{
           "&:hover": {
