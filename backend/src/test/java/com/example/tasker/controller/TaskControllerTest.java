@@ -1,5 +1,6 @@
 import com.example.tasker.model.Task;
 import com.example.tasker.model.TaskStatus;
+import com.example.tasker.model.Project; // Make sure to import Project
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -26,14 +28,16 @@ public class TaskControllerTest {
 
     private Long createdTaskId;
     private Long projectId; // Add a field for projectId
+    private Project project; // Add a field for Project
 
     @BeforeEach
     public void setup() throws Exception {
-        // Assuming you have a project setup before creating tasks
-        // For simplicity, let's assume projectId is set or you can create a new project in the setup
+        // Create a Project object for the task constructor
+        project = new Project("Sample Project", "Project description", List.of()); // Pass an empty list of tasks
         projectId = 1L; // Replace with a valid projectId from your system if necessary
 
-        Task task = new Task("Sample Task", "Task description", TaskStatus.TODO, LocalDateTime.now());
+        // Assuming you create the project beforehand if needed, or mock it here
+        Task task = new Task("Sample Task", "Task description", TaskStatus.TODO, LocalDateTime.now(), project); // Pass project object
         String response = mockMvc.perform(post("/api/projects/" + projectId + "/tasks") // Pass projectId in the path
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(task)))
@@ -45,7 +49,7 @@ public class TaskControllerTest {
 
     @Test
     public void testCreateTask() throws Exception {
-        Task task = new Task("New Task", "This is a new task", TaskStatus.TODO, LocalDateTime.now());
+        Task task = new Task("New Task", "This is a new task", TaskStatus.TODO, LocalDateTime.now(), project); // Pass project object
 
         mockMvc.perform(post("/api/projects/" + projectId + "/tasks") // Pass projectId in the path
                 .contentType(MediaType.APPLICATION_JSON)
@@ -72,7 +76,7 @@ public class TaskControllerTest {
 
     @Test
     public void testUpdateTask() throws Exception {
-        Task updatedTask = new Task("Updated Task", "Updated description", TaskStatus.IN_PROGRESS, LocalDateTime.now());
+        Task updatedTask = new Task("Updated Task", "Updated description", TaskStatus.IN_PROGRESS, LocalDateTime.now(), project); // Pass project object
 
         mockMvc.perform(put("/api/projects/" + projectId + "/tasks/" + createdTaskId) // Pass projectId and taskId in the path
                 .contentType(MediaType.APPLICATION_JSON)
