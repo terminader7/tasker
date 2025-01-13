@@ -62,17 +62,7 @@ const TaskCreator = ({
 
   return (
     <LocalizationProvider dateAdapter={AdapterLuxon}>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          width: "fit-content",
-          padding: "1rem",
-          backgroundColor: theme.palette.background.paper,
-          borderRadius: "10px",
-          boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
-        }}
-      >
+      <Box>
         {showForm && (
           <Box
             sx={{
@@ -81,6 +71,10 @@ const TaskCreator = ({
               alignItems: "center",
               width: "20rem",
               gap: "1rem",
+              boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
+              backgroundColor: theme.palette.background.paper,
+              padding: "1rem",
+              borderRadius: "10px",
             }}
           >
             <IconButton
