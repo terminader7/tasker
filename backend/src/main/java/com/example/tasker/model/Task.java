@@ -1,17 +1,17 @@
 package com.example.tasker.model;
 
-import com.example.tasker.model.TaskStatus;
 
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 
 @Entity
 @Table(name = "tasks")
 public class Task {
-
 
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,6 +39,7 @@ public class Task {
     //ManyToOne relationship with project
     @ManyToOne
     @JoinColumn(name = "project_id", nullable = true)
+    @JsonBackReference
     private Project project;
 
     //Constructors
