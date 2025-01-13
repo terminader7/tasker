@@ -3,6 +3,7 @@ package com.example.tasker.controller;
 import com.example.tasker.model.Task;
 import com.example.tasker.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +19,9 @@ public class TaskController {
 
     //Create a new task
     @PostMapping
-    public Task createTask(@RequestBody Task task) {
-        return taskService.createTask(task);
+    public ResponseEntity<Task> createTask(@RequestBody Task task, @RequestParam Long projectId) {
+       Task createdTask = taskService.createTask(task, projectId);
+       return new ResponseEntity<>(createdTask, HttpStatus.CREATED);
     }
 
     //Get all tasks
@@ -30,8 +32,8 @@ public class TaskController {
 
       // Get a task by id
     @GetMapping("/{id}")
-    public ResponseEntity<Task> getTaskById(@PathVariable Long id) {
-        Optional<Task> task = taskService.getTaskById(id);
+    public ResponseEntity<Task> getTaskById(@PathVariable Long taskId) {
+        Optional<Task> task = taskService.getTaskById(taskId);
         if (task.isPresent()) {
             return ResponseEntity.ok(task.get());
         } else {
@@ -39,10 +41,12 @@ public class TaskController {
         }
     }
 
+   
+
     // Update a task
     @PutMapping("/{id}")
-    public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody Task taskDetails) {
-        Task updatedTask = taskService.updateTask(id, taskDetails);
+    public ResponseEntity<Task> updateTask(@PathVariable Long taskId, @RequestBody Task taskDetails, @RequestParam Long projectId) {
+        Task updatedTask = taskService.updateTask(taskId, taskDetails, projectId);
         if (updatedTask != null) {
             return ResponseEntity.ok(updatedTask);
         } else {
@@ -52,8 +56,8 @@ public class TaskController {
 
     // Delete a task
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
-        taskService.deleteTask(id);
+    public ResponseEntity<Void> deleteTask(@PathVariable Long taskId) {
+        taskService.deleteTask(taskId);
         return ResponseEntity.noContent().build();
     }
 

@@ -1,5 +1,7 @@
 package com.example.tasker.model;
 
+import com.example.tasker.model.TaskStatus;
+
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -10,11 +12,7 @@ import java.time.LocalDateTime;
 @Table(name = "tasks")
 public class Task {
 
-    public enum TaskStatus {
-        TODO,
-        IN_PROGRESS,
-        DONE
-    }
+
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,17 +33,23 @@ public class Task {
     @Column(nullable = false, updatable = false) // The user shouldn't be able to update the created at time ever
     private LocalDateTime createdAt;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private LocalDateTime updatedAt;
+
+    //ManyToOne relationship with project
+    @ManyToOne
+    @JoinColumn(name = "project_id", nullable = true)
+    private Project project;
 
     //Constructors
     public Task() {}
 
-    public Task(String title, String description, TaskStatus status , LocalDateTime dueDate) {
+    public Task(String title, String description, TaskStatus status , LocalDateTime dueDate, Project project) {
         this.title = title;
         this.description = description;
         this.status = status;
         this.dueDate = dueDate;
+        this.project = project;
     }
 
     // GETTERS AND SETTERS
@@ -70,6 +74,9 @@ public class Task {
 
     public LocalDateTime getUpdatedAt() {return updatedAt;}
     public void setUpdatedAt(LocalDateTime updatedAt) {this.updatedAt = updatedAt;}
+
+    public Project getProject() {return project;}
+    public void setProject(Project project) {this.project = project;}
 
 
     //Pre persist will automatically set created at and updated at before the record is saved
