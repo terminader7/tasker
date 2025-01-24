@@ -1,6 +1,5 @@
 import axios from "axios";
 import { NewTask, Task } from "../types/task";
-import { Project } from "../types/project";
 
 const API_URL = "http://localhost:8080/api/tasks";
 
@@ -31,17 +30,5 @@ export const updateTask = async (id: number, task: Partial<Task>) => {
 // Delete a task
 export const deleteTask = async (id: number) => {
   const response = await axios.delete(`${API_URL}/${id}`);
-  return response.data;
-};
-
-// Get all projects
-export const getProjects = async (): Promise<Project[]> => {
-  const response = await axios.get(API_URL);
-  return response.data;
-};
-
-// Get a project by ID
-export const getProject = async (id: number) => {
-  const response = await axios.get(`${API_URL}/${id}`);
   return response.data;
 };
