@@ -31,7 +31,7 @@ public class TaskController {
     }
 
       // Get a task by id
-    @GetMapping("/{id}")
+    @GetMapping("/{taskId}")
     public ResponseEntity<Task> getTaskById(@PathVariable Long taskId) {
         Optional<Task> task = taskService.getTaskById(taskId);
         if (task.isPresent()) {
@@ -44,7 +44,7 @@ public class TaskController {
    
 
     // Update a task
-    @PutMapping("/{id}")
+    @PutMapping("/{taskId}")
     public ResponseEntity<Task> updateTask(@PathVariable Long taskId, @RequestBody Task taskDetails, @RequestParam Long projectId) {
         Task updatedTask = taskService.updateTask(taskId, taskDetails, projectId);
         if (updatedTask != null) {
@@ -55,7 +55,7 @@ public class TaskController {
     }
 
     // Delete a task
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{taskId}")
     public ResponseEntity<Void> deleteTask(@PathVariable Long taskId) {
         taskService.deleteTask(taskId);
         return ResponseEntity.noContent().build();

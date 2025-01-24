@@ -11,7 +11,6 @@ import java.util.Optional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -37,10 +36,12 @@ public class ProjectController {
         return projectService.getAllProjects();
     }
 
+    //Get all 
+
     //Get a project by id
-    @GetMapping("/{id}")
-    public ResponseEntity<Project> getProjectById(@PathVariable Long id) {
-        Optional<Project> project = projectService.getProjectById(id);
+    @GetMapping("/{projectId}")
+    public ResponseEntity<Project> getProjectById(@PathVariable Long proejctId) {
+        Optional<Project> project = projectService.getProjectById(proejctId);
         if (project.isPresent()) {
             return ResponseEntity.ok(project.get());
         } else {
@@ -49,9 +50,9 @@ public class ProjectController {
     }
 
     //Update a project
-    @PutMapping("/{id}")
-    public ResponseEntity<Project> updateProject(@PathVariable Long id, @RequestBody Project projectDetails){
-        Project updatedProject = projectService.updateProject(id, projectDetails);
+    @PutMapping("/{projectId}")
+    public ResponseEntity<Project> updateProject(@PathVariable Long projectId, @RequestBody Project projectDetails){
+        Project updatedProject = projectService.updateProject(projectId, projectDetails);
         if (updatedProject != null) {
             return ResponseEntity.ok(updatedProject);
         } else {
@@ -60,9 +61,9 @@ public class ProjectController {
     }
 
     //Delete a project
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Project> deleteProject(@PathVariable Long id) {
-        projectService.deleteProject(id);
+    @DeleteMapping("/{projectId}")
+    public ResponseEntity<Project> deleteProject(@PathVariable Long projectId) {
+        projectService.deleteProject(projectId);
         return ResponseEntity.noContent().build();
     }
     
