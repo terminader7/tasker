@@ -2,7 +2,7 @@
 import { Box, Typography } from "@mui/material";
 import TaskList from "./features/TaskList";
 import { useTheme } from "@mui/material/styles";
-import PrimaryNavigation from "./components/PrimaryNavigation";
+import PrimaryNavigation from "./features/PrimaryNavigation";
 
 const TaskApp = () => {
   const theme = useTheme();

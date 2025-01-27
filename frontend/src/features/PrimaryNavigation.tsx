@@ -1,9 +1,9 @@
 import { Box, Typography } from "@mui/material";
 import RightArrowIcon from "@mui/icons-material/ArrowForwardIos";
-import InlineContainer from "./InlineContainer";
+import InlineContainer from "../components/InlineContainer";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import { useEffect, useState } from "react";
-import ProjectCreator from "../features/ProjectCreator";
+import ProjectCreator from "./ProjectCreator";
 import { Project } from "../types/project";
 import { getProjects } from "../api/projectService";
 import ProjectList from "./ProjectList";
@@ -11,18 +11,6 @@ import ProjectList from "./ProjectList";
 const PrimaryNavigation = () => {
   const [showForm, setShowForm] = useState(false);
   const [projects, setProjects] = useState<Project[]>([]);
-
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const data = await getProjects();
-        setProjects(data);
-      } catch (error) {
-        console.error("Error fetching tasks", error);
-      }
-    };
-    fetchProjects();
-  }, []);
 
   const handleProjectCreated = (newProject: Project) => {
     setProjects((prevProjects) => [...prevProjects, newProject]);

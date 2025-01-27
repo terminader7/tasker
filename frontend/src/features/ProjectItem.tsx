@@ -1,7 +1,13 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { Project } from "../types/project";
 
-const ProjectItem = ({ project }: { project: Project }) => {
+const ProjectItem = ({
+  project,
+  onDelete,
+}: {
+  project: Project;
+  onDelete: () => void;
+}) => {
   return (
     <Box
       sx={{
@@ -17,6 +23,10 @@ const ProjectItem = ({ project }: { project: Project }) => {
         {project.title}
       </Typography>
       {project.description && <Typography>{project.description}</Typography>}
+
+      <Button variant="contained" color="primary" onClick={onDelete}>
+        Delete Project
+      </Button>
     </Box>
   );
 };

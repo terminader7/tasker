@@ -1,8 +1,9 @@
 import { Box, ListItem, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { Project } from "../types/project";
-import { getProjects } from "../api/projectService";
+import { deleteProject, getProjects } from "../api/projectService";
 import ProjectItem from "./ProjectItem";
+import { enqueueSnackbar, useSnackbar } from "notistack";
 
 interface ProjectListProps {
   projects: Project[];
@@ -10,6 +11,8 @@ interface ProjectListProps {
 }
 
 const ProjectList = ({ projects, setProjects }: ProjectListProps) => {
+  const { enqueueSnackbar } = useSnackbar();
+
   useEffect(() => {
     const fetchProjects = async () => {
       try {
@@ -21,6 +24,21 @@ const ProjectList = ({ projects, setProjects }: ProjectListProps) => {
     };
     fetchProjects();
   }, []);
+
+  const handleDelete = async (id: Project["id"]) => {
+    try {
+      await deleteProject(id);
+      setProjects(projects.filter((project) => project.id !== id));
+      enqueueSnackbar("Project deleted", {
+        variant: "success",
+      });
+    } catch (error) {
+      console.error("Error deleting project", error);
+      enqueueSnackbar("Failed to delete project", {
+        variant: "error",
+      });
+    }
+  };
 
   return (
     <Box
@@ -34,7 +52,11 @@ const ProjectList = ({ projects, setProjects }: ProjectListProps) => {
       {projects.length > 0 ? (
         projects.map((project: Project) => (
           <ListItem>
-            <ProjectItem key={project.id} project={project} />
+            <ProjectItem
+              key={project.id}
+              project={project}
+              onDelete={() => handleDelete(project.id)}
+            />
           </ListItem>
         ))
       ) : (

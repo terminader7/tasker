@@ -5,6 +5,7 @@ import {
   DialogTitle,
   DialogContent,
   DialogContentText,
+  InputLabel,
   Input,
   Button,
 } from "@mui/material";
@@ -76,17 +77,22 @@ const ProjectCreator = ({
       <DialogContent
         sx={{ display: "flex", flexDirection: "column", gap: "2rem" }}
       >
-        <Input
-          placeholder="Project Name"
-          onChange={(e) => setProject({ ...project, title: e.target.value })}
-        />
-        <Input
-          placeholder="Project Description"
-          onChange={(e) =>
-            setProject({ ...project, description: e.target.value })
-          }
-        />
-        <InlineContainer>
+        <Box>
+          <InputLabel>Project Name</InputLabel>
+          <Input
+            onChange={(e) => setProject({ ...project, title: e.target.value })}
+          />
+        </Box>
+        <Box>
+          <InputLabel>Project Description</InputLabel>
+          <Input
+            placeholder="(Optional)"
+            onChange={(e) =>
+              setProject({ ...project, description: e.target.value })
+            }
+          />
+        </Box>
+        <InlineContainer gap="1rem">
           <Button variant="contained" onClick={onClose}>
             Cancel
           </Button>
