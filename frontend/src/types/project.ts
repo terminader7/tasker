@@ -9,4 +9,4 @@ export interface Project {
   updatedAt: Date;
 }
 
-export type NewProject = Omit<Project, "id">;
+export type NewProject = Omit<Project, "id" | "tasks">;

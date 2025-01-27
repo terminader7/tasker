@@ -2,11 +2,39 @@ import { Box, Typography } from "@mui/material";
 import RightArrowIcon from "@mui/icons-material/ArrowForwardIos";
 import InlineContainer from "./InlineContainer";
 import AddBoxIcon from "@mui/icons-material/AddBox";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProjectCreator from "../features/ProjectCreator";
+import { Project } from "../types/project";
+import { getProjects } from "../api/projectService";
+import ProjectList from "./ProjectList";
 
 const PrimaryNavigation = () => {
   const [showForm, setShowForm] = useState(false);
+  const [projects, setProjects] = useState<Project[]>([]);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const data = await getProjects();
+        setProjects(data);
+      } catch (error) {
+        console.error("Error fetching tasks", error);
+      }
+    };
+    fetchProjects();
+  }, []);
+
+  const handleProjectCreated = (newProject: Project) => {
+    setProjects((prevProjects) => [...prevProjects, newProject]);
+  };
+
+  const handleOpen = () => {
+    setShowForm(true);
+  };
+
+  const handleClose = () => {
+    setShowForm(false);
+  };
   return (
     <Box
       sx={{
@@ -29,7 +57,7 @@ const PrimaryNavigation = () => {
         Tasker
       </Typography>
       <InlineContainer
-        onClick={() => setShowForm(!showForm)}
+        onClick={handleOpen}
         sx={{
           "&:hover": {
             backgroundColor: "primary.light",
@@ -43,31 +71,14 @@ const PrimaryNavigation = () => {
           Create Project
         </Typography>
       </InlineContainer>
-      {showForm && <ProjectCreator />}
-      <InlineContainer
-        sx={{
-          "&:hover": {
-            backgroundColor: "primary.light",
-            cursor: "pointer",
-            transition: "0.3s",
-          },
-        }}
-      >
-        <RightArrowIcon sx={{ fontSize: "1rem" }} />
-        <Typography>My Projects</Typography>
-      </InlineContainer>
-      <InlineContainer
-        sx={{
-          "&:hover": {
-            backgroundColor: "primary.light",
-            cursor: "pointer",
-            transition: "0.3s",
-          },
-        }}
-      >
-        <RightArrowIcon sx={{ fontSize: "1rem" }} />
-        <Typography>My Projects</Typography>
-      </InlineContainer>
+      {showForm && (
+        <ProjectCreator
+          open={showForm}
+          onClose={handleClose}
+          onProjectCreated={handleProjectCreated}
+        />
+      )}
+      <ProjectList projects={projects} setProjects={setProjects} />
     </Box>
   );
 };
