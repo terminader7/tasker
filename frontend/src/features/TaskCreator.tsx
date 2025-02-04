@@ -2,7 +2,6 @@ import {
   Box,
   FormControl,
   IconButton,
-  InputLabel,
   Input,
   MenuItem,
   Select,
@@ -59,6 +58,8 @@ const TaskCreator = ({
       console.error("Error creating task", error);
     }
   };
+
+  const isTaskValid = task.title && task.status;
 
   return (
     <LocalizationProvider dateAdapter={AdapterLuxon}>
@@ -138,6 +139,7 @@ const TaskCreator = ({
                 backgroundColor: theme.palette.primary.main,
               }}
               onClick={handleAddTask}
+              disabled={!isTaskValid}
             >
               Add Task
             </Button>

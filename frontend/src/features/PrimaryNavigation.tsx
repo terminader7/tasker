@@ -1,11 +1,9 @@
 import { Box, Typography } from "@mui/material";
-import RightArrowIcon from "@mui/icons-material/ArrowForwardIos";
 import InlineContainer from "../components/InlineContainer";
 import AddBoxIcon from "@mui/icons-material/AddBox";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ProjectCreator from "./ProjectCreator";
 import { Project } from "../types/project";
-import { getProjects } from "../api/projectService";
 import ProjectList from "./ProjectList";
 
 const PrimaryNavigation = () => {

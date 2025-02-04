@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Project } from "../types/project";
 import { deleteProject, getProjects } from "../api/projectService";
 import ProjectItem from "./ProjectItem";
-import { enqueueSnackbar, useSnackbar } from "notistack";
+import { useSnackbar } from "notistack";
 
 interface ProjectListProps {
   projects: Project[];

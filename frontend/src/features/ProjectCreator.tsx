@@ -58,11 +58,13 @@ const ProjectCreator = ({
       enqueueSnackbar("Project created!", {
         variant: "success",
       });
+      onClose();
     } catch (error) {
       enqueueSnackbar("Failed to create project", {
         variant: "error",
       });
       console.error("Error creating project", error);
+      onClose();
     }
   };
 
@@ -96,7 +98,11 @@ const ProjectCreator = ({
           <Button variant="contained" onClick={onClose}>
             Cancel
           </Button>
-          <Button variant="contained" onClick={handleAddProject}>
+          <Button
+            variant="contained"
+            onClick={handleAddProject}
+            disabled={!project.title}
+          >
             Add Project
           </Button>
         </InlineContainer>
