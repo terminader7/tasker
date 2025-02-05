@@ -4,7 +4,7 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import { useState } from "react";
 import ProjectCreator from "./ProjectCreator";
 import { Project } from "../types/project";
-import ProjectList from "./ProjectList";
+import PinnedProjectList from "./PinnedProjectList";
 
 const ProjectNavigation = () => {
   const [showForm, setShowForm] = useState(false);
@@ -64,7 +64,7 @@ const ProjectNavigation = () => {
           onProjectCreated={handleProjectCreated}
         />
       )}
-      <ProjectList projects={projects} setProjects={setProjects} />
+      <PinnedProjectList projects={projects} setProjects={setProjects} />
     </Box>
   );
 };

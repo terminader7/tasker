@@ -5,12 +5,13 @@ import { deleteProject, getProjects } from "../api/projectService";
 import ProjectItem from "../components/ProjectItem";
 import { useSnackbar } from "notistack";
 
+// USE THIS FOR PINNED PROJECTS ONLY
 interface ProjectListProps {
   projects: Project[];
   setProjects: (projects: Project[]) => void;
 }
 
-const ProjectList = ({ projects, setProjects }: ProjectListProps) => {
+const PinnedProjectList = ({ projects, setProjects }: ProjectListProps) => {
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
@@ -68,4 +69,4 @@ const ProjectList = ({ projects, setProjects }: ProjectListProps) => {
   );
 };
 
-export default ProjectList;
+export default PinnedProjectList;
