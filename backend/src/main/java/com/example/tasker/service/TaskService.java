@@ -1,8 +1,6 @@
 package com.example.tasker.service;
 
 import com.example.tasker.model.Task;
-import com.example.tasker.model.Project;
-import com.example.tasker.repository.ProjectRepository;
 import com.example.tasker.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,10 +14,7 @@ public class TaskService {
     @Autowired
     private TaskRepository taskRepository;
 
-    @Autowired
-    private ProjectRepository projectRepository;
-
-    public Task createTask(Task task ) {
+    public Task createTask(Task task) {
         return taskRepository.save(task);
     }
 
