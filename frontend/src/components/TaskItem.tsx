@@ -5,8 +5,8 @@ import { useTheme } from "@mui/material/styles";
 import ClearIcon from "@mui/icons-material/Clear";
 import { useState } from "react";
 import { updateTask } from "../api/taskService";
-import UpdateTaskForm from "./UpdateTaskForm";
-import InlineContainer from "../components/InlineContainer";
+import UpdateTaskForm from "../features/UpdateTaskForm";
+import InlineContainer from "./InlineContainer";
 
 const TaskItem = ({ task, onDelete }: { task: Task; onDelete: () => void }) => {
   const theme = useTheme();

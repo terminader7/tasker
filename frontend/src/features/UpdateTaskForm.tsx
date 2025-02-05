@@ -8,9 +8,8 @@ import {
   TextField,
 } from "@mui/material";
 import { useState } from "react";
-import { Task } from "../types/task";
 import InlineContainer from "../components/InlineContainer";
-import { TaskStatus } from "../types/task";
+import { Task, TaskStatus } from "../types/task";
 
 const UpdateTaskForm = ({
   task,

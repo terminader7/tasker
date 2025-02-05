@@ -1,6 +1,6 @@
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import TaskItem from "./TaskItem";
+import TaskItem from "../components/TaskItem";
 import { deleteTask, getTasks } from "../api/taskService";
 import { useEffect, useState } from "react";
 import { Task } from "../types/task";

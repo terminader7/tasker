@@ -2,7 +2,7 @@ import { Box, ListItem, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { Project } from "../types/project";
 import { deleteProject, getProjects } from "../api/projectService";
-import ProjectItem from "./ProjectItem";
+import ProjectItem from "../components/ProjectItem";
 import { useSnackbar } from "notistack";
 
 interface ProjectListProps {
