@@ -19,8 +19,8 @@ public class TaskController {
 
     //Create a new task
     @PostMapping
-    public ResponseEntity<Task> createTask(@RequestBody Task task, @RequestParam Long projectId) {
-       Task createdTask = taskService.createTask(task, projectId);
+    public ResponseEntity<Task> createTask(@RequestBody Task task) {
+       Task createdTask = taskService.createTask(task);
        return new ResponseEntity<>(createdTask, HttpStatus.CREATED);
     }
 
@@ -45,7 +45,7 @@ public class TaskController {
 
     // Update a task
     @PutMapping("/{taskId}")
-    public ResponseEntity<Task> updateTask(@PathVariable Long taskId, @RequestBody Task taskDetails, @RequestParam Long projectId) {
+    public ResponseEntity<Task> updateTask(@PathVariable Long taskId, @RequestBody Task taskDetails) {
         Task updatedTask = taskService.updateTask(taskId, taskDetails, projectId);
         if (updatedTask != null) {
             return ResponseEntity.ok(updatedTask);

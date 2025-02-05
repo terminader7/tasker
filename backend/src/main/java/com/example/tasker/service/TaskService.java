@@ -19,11 +19,7 @@ public class TaskService {
     @Autowired
     private ProjectRepository projectRepository;
 
-    public Task createTask(Task task, Long projectId) {
-        Project project = projectRepository.findById(projectId).orElseThrow(() -> new RuntimeException("Project not found for id: " + projectId));
-
-        task.setProject(project);
-
+    public Task createTask(Task task ) {
         return taskRepository.save(task);
     }
 
@@ -35,14 +31,14 @@ public class TaskService {
         return taskRepository.findById(id);
     }
 
-    public Task updateTask(Long taskId, Task taskDetails, Long projectId) {
+    public Task updateTask(Long taskId, Task taskDetails) {
         Task task = taskRepository.findById(taskId).orElseThrow(() -> new RuntimeException("Task not found for id: " + taskId));
-        Project project = projectRepository.findById(projectId).orElseThrow(() -> new RuntimeException("Project not found for id: " + projectId));
         task.setTitle(taskDetails.getTitle());
         task.setDescription(taskDetails.getDescription());
         task.setStatus(taskDetails.getStatus());
         task.setDueDate(taskDetails.getDueDate());
-        task.setProject(project);
+        task.setProject(taskDetails.getProject());
+        
         return taskRepository.save(task);
     }
 
