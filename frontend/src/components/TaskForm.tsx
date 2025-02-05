@@ -9,8 +9,6 @@ import {
 } from "@mui/material";
 import { TaskStatus, NewTask } from "../types/task";
 import { Project } from "../types/project";
-import { DateTimePicker } from "@mui/x-date-pickers";
-import { DateTime } from "luxon";
 import { useTheme } from "@mui/material/styles";
 import ProjectSelector from "./ProjectSelector";
 import DueDatePicker from "./DueDatePicker";
