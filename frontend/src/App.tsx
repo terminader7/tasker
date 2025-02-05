@@ -1,12 +1,14 @@
 // src/App.tsx
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import TaskList from "./features/TaskList";
+import { BrowserRouter as Router } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
-import PrimaryNavigation from "./features/PrimaryNavigation";
+import ProjectNavigation from "./features/ProjectNavigation";
 
-const TaskApp = () => {
+const App = () => {
   const theme = useTheme();
   return (
+    // <Router>
     <Box
       sx={{
         display: "flex",
@@ -16,10 +18,11 @@ const TaskApp = () => {
         minHeight: "100vh",
       }}
     >
-      <PrimaryNavigation />
+      <ProjectNavigation />
       <TaskList />
     </Box>
+    // </Router>
   );
 };
 
-export default TaskApp;
+export default App;

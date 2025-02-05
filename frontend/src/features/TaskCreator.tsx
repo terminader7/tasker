@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { Button } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createTask } from "../api/taskService";
 import ClearIcon from "@mui/icons-material/Clear";
 import { TaskStatus, NewTask, Task } from "../types/task";
@@ -17,6 +17,9 @@ import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { DateTime } from "luxon";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
 import { useSnackbar } from "notistack";
+import { useParams } from "react-router-dom";
+import { getProjects } from "../api/projectService";
+import { Project } from "../types/project";
 
 const TaskCreator = ({
   onTaskCreated,
@@ -26,6 +29,21 @@ const TaskCreator = ({
   const theme = useTheme();
   const { enqueueSnackbar } = useSnackbar();
   const [showForm, setShowForm] = useState(false);
+  const [projects, setProjects] = useState<Project[]>([]);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const data = await getProjects();
+        setProjects(data);
+      } catch (error) {
+        console.error("Error fetching tasks", error);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
   const [task, setTask] = useState<NewTask>({
     title: "",
     description: "",
@@ -33,6 +51,7 @@ const TaskCreator = ({
     status: TaskStatus.TODO,
     createdAt: new Date(),
     updatedAt: new Date(),
+    project: null,
   });
 
   const handleAddTask = async () => {
@@ -46,6 +65,7 @@ const TaskCreator = ({
         status: TaskStatus.TODO,
         createdAt: new Date(),
         updatedAt: new Date(),
+        project: null,
       });
       setShowForm(false);
       enqueueSnackbar("Task created!", {
@@ -95,6 +115,15 @@ const TaskCreator = ({
                 width: "100%",
               }}
             />
+            <Input
+              placeholder="Task Description (Optional)"
+              onChange={(e) => {
+                setTask({ ...task, description: e.target.value });
+              }}
+              sx={{
+                width: "100%",
+              }}
+            />
             {/* Might be counter intutitive to allow the user to set the status, but I'm accounting for the rare case that someone completed a task before even creating it, and then they want to create said task just so they could keep track */}
             <FormControl fullWidth>
               <Typography fontWeight={600} fontSize="14px">
@@ -112,15 +141,32 @@ const TaskCreator = ({
                 <MenuItem value={TaskStatus.DONE}>Done</MenuItem>
               </Select>
             </FormControl>
-            <Input
-              placeholder="Task Description (Optional)"
-              onChange={(e) => {
-                setTask({ ...task, description: e.target.value });
-              }}
-              sx={{
-                width: "100%",
-              }}
-            />
+            {/* Might be counter intutitive to allow the user to set the status, but I'm accounting for the rare case that someone completed a task before even creating it, and then they want to create said task just so they could keep track */}
+            <FormControl fullWidth>
+              <Typography fontWeight={600} fontSize="14px">
+                {" "}
+                Project
+              </Typography>
+              <Select
+                value={task.project ? task.project.id : ""}
+                onChange={(e) => {
+                  const selectedProject = projects.find(
+                    (project) => project.id === Number(e.target.value)
+                  );
+                  if (selectedProject) {
+                    setTask({ ...task, project: selectedProject });
+                  }
+                }}
+              >
+                {projects.length
+                  ? projects.map((project: Project) => (
+                      <MenuItem key={project.id} value={project.id}>
+                        {project.title}
+                      </MenuItem>
+                    ))
+                  : null}
+              </Select>
+            </FormControl>
             <DateTimePicker
               label="Due Date (Optional)"
               value={

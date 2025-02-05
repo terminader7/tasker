@@ -6,7 +6,7 @@ import ProjectCreator from "./ProjectCreator";
 import { Project } from "../types/project";
 import ProjectList from "./ProjectList";
 
-const PrimaryNavigation = () => {
+const ProjectNavigation = () => {
   const [showForm, setShowForm] = useState(false);
   const [projects, setProjects] = useState<Project[]>([]);
 
@@ -69,4 +69,4 @@ const PrimaryNavigation = () => {
   );
 };
 
-export default PrimaryNavigation;
+export default ProjectNavigation;

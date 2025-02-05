@@ -1,6 +1,6 @@
 // src/index.tsx
 import ReactDOM from "react-dom/client";
-import TaskApp from "./App";
+import App from "./App";
 import { CssBaseline, useMediaQuery } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { SnackbarProvider } from "notistack";
@@ -24,7 +24,7 @@ const Index = () => {
           marginTop: isMobile ? "0" : "90px",
         }}
       >
-        <TaskApp />
+        <App />
       </SnackbarProvider>
     </ThemeProvider>
   );

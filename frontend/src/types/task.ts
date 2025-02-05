@@ -1,3 +1,5 @@
+import { Project } from "./project";
+
 export enum TaskStatus {
   TODO = "TODO",
   IN_PROGRESS = "IN_PROGRESS",
@@ -12,8 +14,7 @@ export interface Task {
   dueDate?: Date | null;
   createdAt: Date;
   updatedAt: Date;
+  project: Project | null;
 }
 
 export type NewTask = Omit<Task, "id">;
-
-
