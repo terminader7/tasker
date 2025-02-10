@@ -4,8 +4,10 @@ import { NewTask, Task } from "../types/task";
 const API_URL = "http://localhost:8080/api/tasks";
 
 // Get all tasks
-export const getTasks = async (): Promise<Task[]> => {
-  const response = await axios.get(API_URL);
+export const getTasks = async (projectId?: number): Promise<Task[]> => {
+  const response = await axios.get(API_URL, {
+    params: projectId ? { projectId } : undefined,
+  });
   return response.data;
 };
 

@@ -14,6 +14,7 @@ const ProjectItem = ({
   const handleClick = () => {
     navigate(`/${project.id}`);
   };
+
   return (
     <Box
       sx={{

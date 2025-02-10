@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Project } from "../types/project";
 import { getProject } from "../api/projectService";
 
 export interface IProjectContext {
   project: Project | undefined;
-  setProject: React.Dispatch<Project | undefined>;
+  setProject: React.Dispatch<React.SetStateAction<Project | undefined>>;
 }
 
 export const ProjectContext = React.createContext<IProjectContext>({
@@ -22,9 +22,8 @@ export const ProjectProvider = ({
   const { projectId } = useParams<{ projectId: string }>();
 
   useEffect(() => {
-    if (!projectId) return;
-
     const fetchProject = async () => {
+      if (!projectId) return;
       try {
         const data = await getProject(parseInt(projectId));
         setProject(data);
@@ -34,10 +33,6 @@ export const ProjectProvider = ({
     };
     fetchProject();
   }, [projectId]);
-
-  useEffect(() => {
-    console.log({ project });
-  }, [project]);
 
   return (
     <ProjectContext.Provider
