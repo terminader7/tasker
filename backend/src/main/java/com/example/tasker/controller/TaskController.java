@@ -26,8 +26,8 @@ public class TaskController {
 
     //Get all tasks
     @GetMapping
-    public List<Task> getAllTasks() {
-        return taskService.getAllTasks();
+    public List<Task> getAllTasks(@RequestParam Optional<Long> projectId) {
+        return taskService.getAllTasks(projectId);
     }
 
       // Get a task by id

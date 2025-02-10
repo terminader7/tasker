@@ -18,8 +18,12 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
-    public List<Task> getAllTasks() {
-        return taskRepository.findAll();
+    public List<Task> getAllTasks(Optional<Long> projectId) {
+        if(projectId.isPresent()) {
+            return taskRepository.findByProjectId(projectId.get());
+        } else {
+            return taskRepository.findAll();
+        }
     }
 
     public Optional<Task> getTaskById(Long id) {
