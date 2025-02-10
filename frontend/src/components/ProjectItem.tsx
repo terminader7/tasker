@@ -9,11 +9,11 @@ const ProjectItem = ({
   project: Project;
   onDelete: () => void;
 }) => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // const handleClick = () => {
-  //   navigate(`/${project.id}`);
-  // };
+  const handleClick = () => {
+    navigate(`/${project.id}`);
+  };
   return (
     <Box
       sx={{
@@ -29,7 +29,7 @@ const ProjectItem = ({
         },
         transition: "0.3",
       }}
-      // onClick={handleClick}
+      onClick={handleClick}
     >
       <Typography sx={{ fontSize: "1.5rem", fontWeight: 600 }}>
         {project.title}

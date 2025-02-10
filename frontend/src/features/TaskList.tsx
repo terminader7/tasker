@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import TaskCreator from "./TaskCreator";
 import { Box } from "@mui/material";
 import { useSnackbar } from "notistack";
+import { useParams } from "react-router-dom";
 
 const TaskList = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
