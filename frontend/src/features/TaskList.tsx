@@ -51,8 +51,6 @@ const TaskList = () => {
     ? tasks.filter((task) => task.project?.id === parseInt(projectId))
     : tasks;
 
-  console.log({ tasks });
-
   return (
     <Box
       sx={{
