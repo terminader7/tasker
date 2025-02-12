@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import ProjectNavigation from "./features/ProjectNavigation";
 import { ProjectProvider } from "./contexts/projectContext";
+import ProjectsPage from "./features/ProjectsPage";
 
 const App = () => {
   const theme = useTheme();
@@ -24,6 +25,7 @@ const App = () => {
           {/* CHANGE TO SIDE BAR  */}
           <ProjectNavigation />
           <Routes>
+            <Route path={"/"} element={<ProjectsPage />} />
             <Route path={"/:projectId"} element={<TaskList />} />
           </Routes>
         </Box>
