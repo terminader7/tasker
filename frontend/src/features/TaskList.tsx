@@ -8,10 +8,12 @@ import Typography from "@mui/material/Typography";
 import TaskCreator from "./TaskCreator";
 import { Box } from "@mui/material";
 import { useSnackbar } from "notistack";
+import { useParams } from "react-router-dom";
 
 const TaskList = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const { enqueueSnackbar } = useSnackbar();
+  const { projectId } = useParams<{ projectId: string }>();
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -25,8 +27,6 @@ const TaskList = () => {
 
     fetchTasks();
   }, []);
-
-  console.log({ tasks });
 
   const handleDelete = async (id: Task["id"]) => {
     try {
@@ -47,6 +47,12 @@ const TaskList = () => {
     setTasks((prevTasks) => [...prevTasks, newTask]);
   };
 
+  const filteredTasks = projectId
+    ? tasks.filter((task) => task.project?.id === parseInt(projectId))
+    : tasks;
+
+  console.log({ tasks });
+
   return (
     <Box
       sx={{
@@ -63,8 +69,8 @@ const TaskList = () => {
           flexDirection: "column",
         }}
       >
-        {tasks.length > 0 ? (
-          tasks.map((task: Task) => (
+        {filteredTasks.length > 0 ? (
+          filteredTasks.map((task: Task) => (
             <ListItem>
               <TaskItem
                 key={task.id}
