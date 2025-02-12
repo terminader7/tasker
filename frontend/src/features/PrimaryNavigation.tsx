@@ -6,7 +6,7 @@ import ProjectCreator from "./ProjectCreator";
 import { Project } from "../types/project";
 import PinnedProjectList from "./PinnedProjectList";
 
-const ProjectNavigation = () => {
+const PrimaryNavigation = () => {
   const [showForm, setShowForm] = useState(false);
   const [projects, setProjects] = useState<Project[]>([]);
 
@@ -38,6 +38,14 @@ const ProjectNavigation = () => {
           fontSize: "1.5rem",
           fontWeight: 600,
           marginTop: "1rem",
+          ":hover": {
+            cursor: "pointer",
+            backgroundColor: "primary.light",
+            transition: "0.3s",
+          },
+        }}
+        onClick={() => {
+          window.location.href = "/";
         }}
       >
         Tasker
@@ -69,4 +77,4 @@ const ProjectNavigation = () => {
   );
 };
 
-export default ProjectNavigation;
+export default PrimaryNavigation;

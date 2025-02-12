@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 import TaskList from "./features/TaskList";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
-import ProjectNavigation from "./features/ProjectNavigation";
+import PrimaryNavigation from "./features/PrimaryNavigation";
 import { ProjectProvider } from "./contexts/projectContext";
 import ProjectsPage from "./features/ProjectsPage";
 
@@ -22,8 +22,7 @@ const App = () => {
             minHeight: "100vh",
           }}
         >
-          {/* CHANGE TO SIDE BAR  */}
-          <ProjectNavigation />
+          <PrimaryNavigation />
           <Routes>
             <Route path={"/"} element={<ProjectsPage />} />
             <Route path={"/:projectId"} element={<TaskList />} />
