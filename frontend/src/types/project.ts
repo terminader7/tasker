@@ -7,6 +7,7 @@ export interface Project {
   tasks: Task[];
   createdAt: Date;
   updatedAt: Date;
+  isPinned: boolean;
 }
 
 export type NewProject = Omit<Project, "id" | "tasks">;
