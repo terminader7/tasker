@@ -31,6 +31,9 @@ public class Project {
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> tasks;
 
+    @Column(nullable = false)
+    private boolean isPinned;
+
 
     //Constructors
     public Project() {}
@@ -39,6 +42,7 @@ public class Project {
         this.title = title;
         this.description = description;
         this.tasks = tasks;
+        this.isPinned = false;
     }
 
     //Getters and Setters
@@ -59,6 +63,9 @@ public class Project {
     public void setUpdatedAt(LocalDateTime updatedAt) {this.updatedAt = updatedAt;}
 
     public List<Task> getTasks() {return tasks;}
+
+    public boolean getIsPinned() {return isPinned;}
+    public void setIsPinned(boolean isPinned) {this.isPinned = isPinned;}
 
 
     //Pre persist will automatically set created at and updated at before the record is saved
