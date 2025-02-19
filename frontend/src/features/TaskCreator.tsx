@@ -39,7 +39,7 @@ const TaskCreator = ({
     project: null,
   });
 
-  const handleAddTask = async () => {
+  const handleCreateTask = async () => {
     try {
       const newTask = await createTask(task);
       onTaskCreated(newTask);
@@ -74,7 +74,7 @@ const TaskCreator = ({
           task={task}
           setTask={setTask}
           projects={projects}
-          handleAddTask={handleAddTask}
+          handleCreateTask={handleCreateTask}
           isTaskValid={isTaskValid}
         />
       )}

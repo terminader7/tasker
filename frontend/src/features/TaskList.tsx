@@ -19,12 +19,16 @@ const TaskList = () => {
     const fetchTasks = async () => {
       try {
         const data = await getTasks();
-        setTasks(data);
+        console.log("Fetched tasks:", data);
+        if (Array.isArray(data)) {
+          setTasks(data);
+        } else {
+          console.error("Fetched data is not an array:", data);
+        }
       } catch (error) {
         console.error("Error fetching tasks", error);
       }
     };
-
     fetchTasks();
   }, []);
 
@@ -44,8 +48,14 @@ const TaskList = () => {
   };
 
   const handleTaskCreated = (newTask: Task) => {
-    setTasks((prevTasks) => [...prevTasks, newTask]);
+    setTasks((prevTasks) => {
+      const updatedTasks = [...prevTasks, newTask];
+      console.log("Updated tasks after adding new task:", updatedTasks);
+      return updatedTasks;
+    });
   };
+
+  console.log({ projectId });
 
   const filteredTasks = projectId
     ? tasks.filter((task) => task.project?.id === parseInt(projectId))
@@ -61,6 +71,7 @@ const TaskList = () => {
       }}
     >
       <TaskCreator onTaskCreated={handleTaskCreated} />
+      {/* <Typography variant="h4">{task.project?.title}</Typography> */}
       <List
         sx={{
           display: "flex",
@@ -68,14 +79,19 @@ const TaskList = () => {
         }}
       >
         {filteredTasks.length > 0 ? (
-          filteredTasks.map((task: Task) => (
-            <ListItem>
-              <TaskItem
-                key={task.id}
-                task={task}
-                onDelete={() => handleDelete(task.id)}
-              />
-            </ListItem>
+          filteredTasks.map((task) => (
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+              key={task.id}
+            >
+              <ListItem>
+                <TaskItem task={task} onDelete={() => handleDelete(task.id)} />
+              </ListItem>
+            </Box>
           ))
         ) : (
           <ListItem>

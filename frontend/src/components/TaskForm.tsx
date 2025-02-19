@@ -17,13 +17,13 @@ const TaskForm = ({
   task,
   setTask,
   projects,
-  handleAddTask,
+  handleCreateTask,
   isTaskValid,
 }: {
   task: NewTask;
   setTask: React.Dispatch<React.SetStateAction<NewTask>>;
   projects: Project[];
-  handleAddTask: () => void;
+  handleCreateTask: () => void;
   isTaskValid: boolean;
 }) => {
   const theme = useTheme();
@@ -72,7 +72,7 @@ const TaskForm = ({
       <Button
         variant="contained"
         sx={{ backgroundColor: theme.palette.primary.main }}
-        onClick={handleAddTask}
+        onClick={handleCreateTask}
         disabled={!isTaskValid}
       >
         Add Task
