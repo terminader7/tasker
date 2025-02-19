@@ -5,15 +5,15 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 
 
 @Entity
 @Table(name = "tasks")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+// @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Task {
 
     @Id 
@@ -42,6 +42,7 @@ public class Task {
     //ManyToOne relationship with project
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "project_id", nullable = true)
+    @JsonManagedReference
     private Project project;
 
     //Constructors
@@ -84,14 +85,14 @@ public class Task {
 
     //Pre persist will automatically set created at and updated at before the record is saved
     @PrePersist
-    protected void OnCreate() {
+    protected void onCreate() {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now(); // Just to give an initial set up to updated at
     }
 
     // PreUpdate updates the upedatedat time whenever the record is modified
     @PreUpdate
-    protected void OnUpdate() {
+    protected void onUpdate() {
         this.updatedAt = LocalDateTime.now();
     }
 
