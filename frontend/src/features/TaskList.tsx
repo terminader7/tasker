@@ -18,7 +18,9 @@ const TaskList = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const data = await getTasks();
+        if (!projectId) return;
+
+        const data = await getTasks(parseInt(projectId));
         console.log("Fetched tasks:", data);
         if (Array.isArray(data)) {
           setTasks(data);
@@ -30,7 +32,7 @@ const TaskList = () => {
       }
     };
     fetchTasks();
-  }, []);
+  }, [projectId]);
 
   const handleDelete = async (id: Task["id"]) => {
     try {
@@ -57,9 +59,9 @@ const TaskList = () => {
 
   console.log({ projectId });
 
-  const filteredTasks = projectId
-    ? tasks.filter((task) => task.project?.id === parseInt(projectId))
-    : tasks;
+  // const filteredTasks = projectId
+  //   ? tasks.filter((task) => task.project?.id === parseInt(projectId))
+  //   : tasks;
 
   return (
     <Box
@@ -78,8 +80,8 @@ const TaskList = () => {
           flexDirection: "column",
         }}
       >
-        {filteredTasks.length > 0 ? (
-          filteredTasks.map((task) => (
+        {tasks.length > 0 ? (
+          tasks.map((task) => (
             <Box
               sx={{
                 display: "flex",
