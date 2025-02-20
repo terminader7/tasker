@@ -20,6 +20,7 @@ public class TaskController {
     //Create a new task
     @PostMapping
     public ResponseEntity<Task> createTask(@RequestBody Task task) {
+        System.out.println("Recieved task:" + task);
        Task createdTask = taskService.createTask(task);
        return new ResponseEntity<>(createdTask, HttpStatus.CREATED);
     }

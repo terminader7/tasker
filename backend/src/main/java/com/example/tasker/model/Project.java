@@ -30,7 +30,7 @@ public class Project {
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonBackReference
+    // @JsonBackReference
     private List<Task> tasks;
 
     @Column(nullable = false)

@@ -42,7 +42,7 @@ public class Task {
     //ManyToOne relationship with project
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "project_id", nullable = true)
-    @JsonManagedReference
+    // @JsonManagedReference
     private Project project;
 
     //Constructors
