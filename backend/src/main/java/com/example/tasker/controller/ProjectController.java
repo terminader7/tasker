@@ -40,8 +40,8 @@ public class ProjectController {
 
     //Get a project by id
     @GetMapping("/{projectId}")
-    public ResponseEntity<Project> getProjectById(@PathVariable Long proejctId) {
-        Optional<Project> project = projectService.getProjectById(proejctId);
+    public ResponseEntity<Project> getProjectById(@PathVariable Long projectId) {
+        Optional<Project> project = projectService.getProjectById(projectId);
         if (project.isPresent()) {
             return ResponseEntity.ok(project.get());
         } else {
