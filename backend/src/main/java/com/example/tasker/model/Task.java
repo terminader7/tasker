@@ -5,15 +5,9 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
-
 
 @Entity
 @Table(name = "tasks")
-// @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Task {
 
     @Id 
@@ -42,7 +36,6 @@ public class Task {
     //ManyToOne relationship with project
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "project_id", nullable = true)
-    // @JsonManagedReference
     private Project project;
 
     //Constructors
