@@ -11,8 +11,10 @@ export const getProjects = async (): Promise<Project[]> => {
 };
 
 // Get a project by ID
-export const getProject = async (id: number) => {
+export const getProject = async (id: number): Promise<Project> => {
+  console.log(`Fetching project with ID: ${id}`); // Add this line
   const response = await axios.get(`${API_URL}/${id}`);
+  console.log("Fetched project data:", response.data); // Add this line
   return response.data;
 };
 

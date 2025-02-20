@@ -19,13 +19,14 @@ const ProjectsPage = () => {
     fetchTasks();
   }, []);
   return (
-    <Box>
-      <List
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+      }}
+    >
+      <List>
         {projects.length > 0 ? (
           projects.map((project: Project) => {
             return (

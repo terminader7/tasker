@@ -2,26 +2,29 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import TaskItem from "../components/TaskItem";
 import { deleteTask, getTasks } from "../api/taskService";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Task } from "../types/task";
 import Typography from "@mui/material/Typography";
 import TaskCreator from "./TaskCreator";
 import { Box } from "@mui/material";
 import { useSnackbar } from "notistack";
 import { useParams } from "react-router-dom";
+import { ProjectContext } from "../contexts/projectContext";
 
 const TaskList = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const { enqueueSnackbar } = useSnackbar();
   const { projectId } = useParams<{ projectId: string }>();
+  const { project, setProjectId } = useContext(ProjectContext);
 
   useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        if (!projectId) return;
+    setProjectId(projectId);
 
+    const fetchTasks = async () => {
+      if (!projectId) return;
+
+      try {
         const data = await getTasks(parseInt(projectId));
-        console.log("Fetched tasks:", data);
         if (Array.isArray(data)) {
           setTasks(data);
         } else {
@@ -32,6 +35,7 @@ const TaskList = () => {
       }
     };
     fetchTasks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectId]);
 
   const handleDelete = async (id: Task["id"]) => {
@@ -57,11 +61,7 @@ const TaskList = () => {
     });
   };
 
-  console.log({ projectId });
-
-  // const filteredTasks = projectId
-  //   ? tasks.filter((task) => task.project?.id === parseInt(projectId))
-  //   : tasks;
+  console.log({ project });
 
   return (
     <Box
@@ -73,7 +73,7 @@ const TaskList = () => {
       }}
     >
       <TaskCreator onTaskCreated={handleTaskCreated} />
-      {/* <Typography variant="h4">{task.project?.title}</Typography> */}
+      {project?.title && <Typography variant="h4">{project.title}</Typography>}
       <List
         sx={{
           display: "flex",
