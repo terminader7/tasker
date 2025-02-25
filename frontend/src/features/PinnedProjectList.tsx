@@ -1,10 +1,11 @@
-import { Box, ListItem, Typography } from "@mui/material";
+import { Box, Icon, ListItem, Typography } from "@mui/material";
 import { useContext, useEffect } from "react";
 import { Project } from "../types/project";
 import { deleteProject, getProjects } from "../api/projectService";
 import ProjectItem from "../components/ProjectItem";
 import { useSnackbar } from "notistack";
 import { ProjectContext } from "../contexts/projectContext";
+import PinnedIcon from "@mui/icons-material/PushPinRounded";
 
 const PinnedProjectList = () => {
   const { projects, setProjects } = useContext(ProjectContext);
@@ -46,6 +47,9 @@ const PinnedProjectList = () => {
         marginTop: "1rem",
       }}
     >
+      <Icon>
+        <PinnedIcon sx={{ color: "common.white" }} />
+      </Icon>
       {projects.length > 0 ? (
         projects.map(
           (project: Project) =>

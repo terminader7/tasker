@@ -36,6 +36,10 @@ const theme = createTheme({
       main: "#29B6F6", // Cyan for informational messages
       contrastText: "#FFFFFF",
     },
+    common: {
+      white: "#FFFFFF",
+      black: "#000000",
+    },
   },
   typography: {
     fontFamily: "'Poppins', 'Roboto', 'Arial', sans-serif", // Modern, clean fonts for headings and body text

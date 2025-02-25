@@ -20,26 +20,18 @@ const ProjectItem = ({
       sx={{
         display: "flex",
         flexDirection: "column",
-        gap: "1rem",
-        padding: "1rem",
-        backgroundColor: "primary.light",
         borderRadius: "0.5rem",
         cursor: "pointer",
         "&:hover": {
-          backgroundColor: "primary.dark",
+          backgroundColor: "primary.light",
         },
         transition: "0.2s",
       }}
       onClick={handleClick}
     >
-      <Typography sx={{ fontSize: "1.5rem", fontWeight: 600 }}>
+      <Typography variant="body1" fontWeight={"bold"} color="common.white">
         {project.title}
       </Typography>
-      {project.description && <Typography>{project.description}</Typography>}
-
-      <Button variant="contained" color="primary" onClick={onDelete}>
-        Delete Project
-      </Button>
     </Box>
   );
 };

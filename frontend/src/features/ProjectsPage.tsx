@@ -1,5 +1,5 @@
 import { Box, Button, List, ListItem, Typography } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { getProjects, updateProject } from "../api/projectService";
 import { Project } from "../types/project";
 import { useSnackbar } from "notistack";

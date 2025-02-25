@@ -1,8 +1,8 @@
 import Box from "@mui/material/Box";
-import { Button, IconButton, Typography } from "@mui/material";
+import { Button, IconButton, Typography, Tooltip } from "@mui/material";
 import { Task } from "../types/task";
 import { useTheme } from "@mui/material/styles";
-import ClearIcon from "@mui/icons-material/Clear";
+import DeleteIcon from "@mui/icons-material/DeleteForeverRounded";
 import { useState } from "react";
 import UpdateTaskForm from "../features/UpdateTaskForm";
 import InlineContainer from "./InlineContainer";
@@ -29,15 +29,18 @@ const TaskItem = ({
         boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
       }}
     >
-      <IconButton
-        sx={{
-          alignSelf: "flex-end",
-          posiiton: "fixed",
-        }}
-        onClick={onDelete}
-      >
-        <ClearIcon />
-      </IconButton>
+      <Tooltip title="Delete task">
+        <IconButton
+          sx={{
+            alignSelf: "flex-end",
+            posiiton: "fixed",
+            color: "error.main",
+          }}
+          onClick={onDelete}
+        >
+          <DeleteIcon />
+        </IconButton>
+      </Tooltip>
       <Typography fontWeight={600}>{task.title}</Typography>
       <Typography variant="body1">{task.status}</Typography>
       {task.description && (
