@@ -3,8 +3,8 @@ import { Project } from "../types/project";
 import { getProject } from "../api/projectService";
 
 export interface IProjectContext {
-  project: Project | undefined;
-  setProject: React.Dispatch<React.SetStateAction<Project | undefined>>;
+  projects: Project[];
+  setProjects: React.Dispatch<React.SetStateAction<Project[]>>;
   loading: boolean;
   error: string | null;
   projectId: string | undefined;
@@ -12,8 +12,8 @@ export interface IProjectContext {
 }
 
 export const ProjectContext = React.createContext<IProjectContext>({
-  project: undefined,
-  setProject: () => null,
+  projects: [],
+  setProjects: () => null,
   loading: false,
   error: null,
   projectId: "",
@@ -25,10 +25,9 @@ export const ProjectProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [project, setProject] = useState<Project>();
+  const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  // IS THERE A BETTER WAY MASON!?
   const [projectId, setProjectId] = useState<string | undefined>();
 
   useEffect(() => {
@@ -38,7 +37,18 @@ export const ProjectProvider = ({
         setLoading(true);
         setError(null);
         const data = await getProject(parseInt(projectId));
-        setProject(data);
+        setProjects((prevProjects) => {
+          const existingProjectIndex = prevProjects.findIndex(
+            (project) => project.id === data.id
+          );
+          if (existingProjectIndex !== -1) {
+            const updatedProjects = [...prevProjects];
+            updatedProjects[existingProjectIndex] = data;
+            return updatedProjects;
+          } else {
+            return [...prevProjects, data];
+          }
+        });
       } catch (error) {
         console.error("Error fetching project", error);
         setError("Failed to load project");
@@ -49,13 +59,11 @@ export const ProjectProvider = ({
     fetchProject();
   }, [projectId]);
 
-  console.log("RUNNING");
-
   return (
     <ProjectContext.Provider
       value={{
-        project,
-        setProject,
+        projects,
+        setProjects,
         loading,
         error,
         projectId,

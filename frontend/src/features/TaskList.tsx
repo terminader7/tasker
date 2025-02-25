@@ -15,7 +15,7 @@ const TaskList = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const { enqueueSnackbar } = useSnackbar();
   const { projectId } = useParams<{ projectId: string }>();
-  const { project, setProjectId } = useContext(ProjectContext);
+  const { projects, setProjectId } = useContext(ProjectContext);
 
   useEffect(() => {
     setProjectId(projectId);
@@ -75,6 +75,10 @@ const TaskList = () => {
       return updatedTasks;
     });
   };
+
+  const project = projects.find(
+    (proj) => proj.id === parseInt(projectId || "")
+  );
 
   return (
     <Box

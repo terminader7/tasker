@@ -1,16 +1,13 @@
 import { Box, ListItem, Typography } from "@mui/material";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Project } from "../types/project";
 import { deleteProject, getProjects } from "../api/projectService";
 import ProjectItem from "../components/ProjectItem";
 import { useSnackbar } from "notistack";
+import { ProjectContext } from "../contexts/projectContext";
 
-interface ProjectListProps {
-  projects: Project[];
-  setProjects: (projects: Project[]) => void;
-}
-
-const PinnedProjectList = ({ projects, setProjects }: ProjectListProps) => {
+const PinnedProjectList = () => {
+  const { projects, setProjects } = useContext(ProjectContext);
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
@@ -23,7 +20,7 @@ const PinnedProjectList = ({ projects, setProjects }: ProjectListProps) => {
       }
     };
     fetchProjects();
-  }, []);
+  }, [setProjects]);
 
   const handleDelete = async (id: Project["id"]) => {
     try {

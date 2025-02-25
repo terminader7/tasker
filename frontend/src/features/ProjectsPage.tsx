@@ -1,16 +1,17 @@
 import { Box, Button, List, ListItem, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getProjects, updateProject } from "../api/projectService";
 import { Project } from "../types/project";
 import { useSnackbar } from "notistack";
+import { ProjectContext } from "../contexts/projectContext";
 
 const ProjectsPage = () => {
-  const [projects, setProjects] = useState<Project[]>([]);
+  const { projects, setProjects } = useContext(ProjectContext);
 
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
-    const fetchTasks = async () => {
+    const fetchProjects = async () => {
       try {
         const data = await getProjects();
         setProjects(data);
@@ -19,8 +20,8 @@ const ProjectsPage = () => {
       }
     };
 
-    fetchTasks();
-  }, []);
+    fetchProjects();
+  }, [setProjects]);
 
   const handleUpdate = async (
     id: Project["id"],

@@ -1,14 +1,15 @@
 import { Box, Typography } from "@mui/material";
 import InlineContainer from "../components/InlineContainer";
 import AddBoxIcon from "@mui/icons-material/AddBox";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ProjectCreator from "./ProjectCreator";
 import { Project } from "../types/project";
 import PinnedProjectList from "./PinnedProjectList";
+import { ProjectContext } from "../contexts/projectContext";
 
 const PrimaryNavigation = () => {
   const [showForm, setShowForm] = useState(false);
-  const [projects, setProjects] = useState<Project[]>([]);
+  const { setProjects } = useContext(ProjectContext);
 
   const handleProjectCreated = (newProject: Project) => {
     setProjects((prevProjects) => [...prevProjects, newProject]);
@@ -72,7 +73,7 @@ const PrimaryNavigation = () => {
           onProjectCreated={handleProjectCreated}
         />
       )}
-      <PinnedProjectList projects={projects} setProjects={setProjects} />
+      <PinnedProjectList />
     </Box>
   );
 };
