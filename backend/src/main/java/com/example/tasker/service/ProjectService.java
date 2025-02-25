@@ -29,9 +29,14 @@ public class ProjectService {
 
     public Project updateProject(Long id, Project projectDetails) {
         Project project = projectRepository.findById(id).orElseThrow(() -> new RuntimeException("Project not found for id:" + id));
-        project.setTitle(projectDetails.getTitle());
-        project.setDescription(projectDetails.getDescription());
-        project.setIsPinned(projectDetails.getIsPinned());
+        if (projectDetails.getTitle() != null) {
+            project.setTitle(projectDetails.getTitle());
+        } 
+        if (projectDetails.getDescription() != null) {
+            project.setDescription(projectDetails.getDescription());
+        }
+            project.setIsPinned(projectDetails.getIsPinned());
+
         return projectRepository.save(project);
     }
 

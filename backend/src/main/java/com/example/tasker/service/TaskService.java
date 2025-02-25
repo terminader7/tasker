@@ -32,12 +32,23 @@ public class TaskService {
 
     public Task updateTask(Long taskId, Task taskDetails) {
         Task task = taskRepository.findById(taskId).orElseThrow(() -> new RuntimeException("Task not found for id: " + taskId));
-        task.setTitle(taskDetails.getTitle());
-        task.setDescription(taskDetails.getDescription());
-        task.setStatus(taskDetails.getStatus());
-        task.setDueDate(taskDetails.getDueDate());
-        task.setProject(taskDetails.getProject());
         
+        if (taskDetails.getTitle() != null) {
+            task.setTitle(taskDetails.getTitle());
+        }
+        if (taskDetails.getDescription() != null) {
+            task.setDescription(taskDetails.getDescription());
+        }
+        if (taskDetails.getStatus() != null) {
+            task.setStatus(taskDetails.getStatus());
+        }
+        if (taskDetails.getDueDate() != null) {
+            task.setDueDate(taskDetails.getDueDate());
+        }
+        if (taskDetails.getProject() != null) {
+            task.setProject(taskDetails.getProject());
+        }
+    
         return taskRepository.save(task);
     }
 
