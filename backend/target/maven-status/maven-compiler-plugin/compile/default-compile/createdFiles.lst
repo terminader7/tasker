@@ -1,5 +1,11 @@
+com\example\tasker\WebConfig.class
+com\example\tasker\model\Project.class
 com\example\tasker\TaskerApplication.class
 com\example\tasker\model\Task.class
 com\example\tasker\service\TaskService.class
+com\example\tasker\model\TaskStatus.class
 com\example\tasker\repository\TaskRepository.class
+com\example\tasker\controller\ProjectController.class
+com\example\tasker\service\ProjectService.class
+com\example\tasker\repository\ProjectRepository.class
 com\example\tasker\controller\TaskController.class

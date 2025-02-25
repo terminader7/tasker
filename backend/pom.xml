@@ -64,6 +64,12 @@
             <optional>true</optional>
         </dependency>
 
+         <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
         <!-- Spring Boot DevTools (Optional) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
