@@ -1,7 +1,7 @@
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import TaskItem from "../components/TaskItem";
-import { deleteTask, getTasks } from "../api/taskService";
+import { deleteTask, getTasks, updateTask } from "../api/taskService";
 import { useContext, useEffect, useState } from "react";
 import { Task } from "../types/task";
 import Typography from "@mui/material/Typography";
@@ -53,6 +53,21 @@ const TaskList = () => {
     }
   };
 
+  const handleUpdate = async (id: Task["id"], updatedData: Partial<Task>) => {
+    try {
+      const updatedTask = await updateTask(id, updatedData);
+      setTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task.id === id ? { ...task, ...updatedTask } : task
+        )
+      );
+      enqueueSnackbar("Task updated successfully", { variant: "success" });
+    } catch (error) {
+      console.error("Error updating Task", error);
+      enqueueSnackbar("Failed to update task", { variant: "error" });
+    }
+  };
+
   const handleTaskCreated = (newTask: Task) => {
     setTasks((prevTasks) => {
       const updatedTasks = [...prevTasks, newTask];
@@ -60,8 +75,6 @@ const TaskList = () => {
       return updatedTasks;
     });
   };
-
-  console.log({ project });
 
   return (
     <Box
@@ -91,7 +104,11 @@ const TaskList = () => {
               key={task.id}
             >
               <ListItem>
-                <TaskItem task={task} onDelete={() => handleDelete(task.id)} />
+                <TaskItem
+                  task={task}
+                  onDelete={() => handleDelete(task.id)}
+                  handleUpdate={handleUpdate}
+                />
               </ListItem>
             </Box>
           ))

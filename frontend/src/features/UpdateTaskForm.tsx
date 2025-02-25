@@ -13,17 +13,19 @@ import { Task, TaskStatus } from "../types/task";
 
 const UpdateTaskForm = ({
   task,
-  onUpdate,
+  handleUpdate,
   setShowUpdateForm,
 }: {
   task: Task;
-  onUpdate: (updatedTask: Partial<Task>) => void;
+  handleUpdate: (id: Task["id"], updatedData: Partial<Task>) => void;
   setShowUpdateForm: any;
 }) => {
   const [updatedTask, setUpdatedTask] = useState<Partial<Task>>({
     title: task.title,
     description: task.description,
     dueDate: task.dueDate,
+    status: task.status,
+    project: task.project,
   });
 
   const handleInputChange = (field: keyof Task, value: string) => {
@@ -31,7 +33,8 @@ const UpdateTaskForm = ({
   };
 
   const handleSubmit = () => {
-    onUpdate(updatedTask);
+    handleUpdate(task.id, updatedTask);
+    setShowUpdateForm(false);
   };
 
   return (
@@ -79,7 +82,10 @@ const UpdateTaskForm = ({
             color: "primary.contrastText",
             backgroundColor: "primary.main",
           }}
-          onClick={handleSubmit}
+          onClick={() => {
+            handleSubmit();
+            setShowUpdateForm(false);
+          }}
         >
           Save Changes
         </Button>

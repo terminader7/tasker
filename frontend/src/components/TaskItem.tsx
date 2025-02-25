@@ -4,22 +4,20 @@ import { Task } from "../types/task";
 import { useTheme } from "@mui/material/styles";
 import ClearIcon from "@mui/icons-material/Clear";
 import { useState } from "react";
-import { updateTask } from "../api/taskService";
 import UpdateTaskForm from "../features/UpdateTaskForm";
 import InlineContainer from "./InlineContainer";
 
-const TaskItem = ({ task, onDelete }: { task: Task; onDelete: () => void }) => {
+const TaskItem = ({
+  task,
+  onDelete,
+  handleUpdate,
+}: {
+  task: Task;
+  onDelete: () => void;
+  handleUpdate: (id: Task["id"], updatedData: Partial<Task>) => void;
+}) => {
   const theme = useTheme();
   const [showUpdateForm, setShowUpdateForm] = useState(false);
-
-  const handleUpdate = async (updatedData: Partial<Task>) => {
-    try {
-      await updateTask(task.id, updatedData);
-      setShowUpdateForm(false);
-    } catch (error) {
-      console.error("Error updating Task", error);
-    }
-  };
 
   return (
     <InlineContainer
@@ -86,7 +84,7 @@ const TaskItem = ({ task, onDelete }: { task: Task; onDelete: () => void }) => {
       {showUpdateForm && (
         <UpdateTaskForm
           task={task}
-          onUpdate={handleUpdate}
+          handleUpdate={handleUpdate}
           setShowUpdateForm={setShowUpdateForm}
         />
       )}
