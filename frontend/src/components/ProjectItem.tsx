@@ -28,7 +28,7 @@ const ProjectItem = ({
         "&:hover": {
           backgroundColor: "primary.dark",
         },
-        transition: "0.3",
+        transition: "0.2s",
       }}
       onClick={handleClick}
     >

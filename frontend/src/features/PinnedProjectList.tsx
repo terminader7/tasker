@@ -5,7 +5,6 @@ import { deleteProject, getProjects } from "../api/projectService";
 import ProjectItem from "../components/ProjectItem";
 import { useSnackbar } from "notistack";
 
-// USE THIS FOR PINNED PROJECTS ONLY
 interface ProjectListProps {
   projects: Project[];
   setProjects: (projects: Project[]) => void;
@@ -51,15 +50,17 @@ const PinnedProjectList = ({ projects, setProjects }: ProjectListProps) => {
       }}
     >
       {projects.length > 0 ? (
-        projects.map((project: Project) => (
-          <ListItem>
-            <ProjectItem
-              key={project.id}
-              project={project}
-              onDelete={() => handleDelete(project.id)}
-            />
-          </ListItem>
-        ))
+        projects.map(
+          (project: Project) =>
+            project.isPinned && (
+              <ListItem key={project.id}>
+                <ProjectItem
+                  project={project}
+                  onDelete={() => handleDelete(project.id)}
+                />
+              </ListItem>
+            )
+        )
       ) : (
         <ListItem>
           <Typography>No projects available</Typography>
