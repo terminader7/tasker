@@ -1,4 +1,3 @@
-import Box from "@mui/material/Box";
 import { Button, IconButton, Typography, Tooltip } from "@mui/material";
 import { Task } from "../types/task";
 import { useTheme } from "@mui/material/styles";

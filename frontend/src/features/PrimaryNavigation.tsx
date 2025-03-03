@@ -9,6 +9,8 @@ import { ProjectContext } from "../contexts/projectContext";
 import SearchBar from "./SearchBar";
 import UpcomingItems from "./UpcomingItems";
 import TodayItems from "./TodayItems";
+import IconContainer from "../components/IconContainer";
+import TaskerIcon from "@mui/icons-material/AssignmentRounded";
 
 const PrimaryNavigation = () => {
   const [showForm, setShowForm] = useState(false);
@@ -36,25 +38,40 @@ const PrimaryNavigation = () => {
         padding: "1rem",
       }}
     >
-      <Typography
+      <InlineContainer
         sx={{
-          fontSize: "1.5rem",
           width: "100%",
-          fontWeight: 600,
           marginTop: "1rem",
           borderRadius: ".5rem",
           ":hover": {
             cursor: "pointer",
             backgroundColor: "primary.light",
+            color: "primary.main",
             transition: "0.3s",
           },
         }}
-        onClick={() => {
-          window.location.href = "/";
-        }}
       >
-        Tasker
-      </Typography>
+        <IconContainer>
+          <TaskerIcon
+            fontSize="medium"
+            sx={{
+              color: "inherit",
+            }}
+          />
+        </IconContainer>
+        <Typography
+          sx={{
+            color: "inherit",
+            fontSize: "1.5rem",
+            fontWeight: 600,
+          }}
+          onClick={() => {
+            window.location.href = "/";
+          }}
+        >
+          Tasker
+        </Typography>
+      </InlineContainer>
       <Box
         sx={{
           display: "flex",
@@ -98,7 +115,14 @@ const PrimaryNavigation = () => {
           marginTop: "3rem",
         }}
       >
-        <Typography variant="body1">My Projects</Typography>
+        <Typography
+          variant="body1"
+          sx={{
+            cursor: "default",
+          }}
+        >
+          My Projects
+        </Typography>
         <PinnedProjectList />
       </Box>
     </Box>
