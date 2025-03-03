@@ -1,39 +1,41 @@
-// src/theme/theme.js
 import { createTheme } from "@mui/material/styles";
+import { lighten } from "@mui/material/styles";
 
 const theme = createTheme({
   palette: {
-    mode: "light", // Light mode, but this could easily be changed to 'dark' if preferred
+    mode: "light",
     primary: {
-      main: "#1E88E5", // Soft blue for primary actions
-      contrastText: "#FFFFFF", // Ensures text is readable on primary color
-    },
-    secondary: {
-      main: "#FF6F61", // Soft red accent for secondary actions
+      main: "#00897B", // Deep teal for primary actions
+      light: lighten("#00897B", 0.6), // Lighter teal for hover effects
       contrastText: "#FFFFFF",
     },
+    secondary: {
+      main: "#F57C00", // Deep indigo for contrast
+      contrastText: "#FFFFFF",
+    },
+
     background: {
-      default: "#F4F6F8", // Light gray background to keep it easy on the eyes
-      paper: "#FFFFFF", // White background for cards and modals
+      default: "#ECEFF1", // Soft cool gray background
+      paper: "#CFD8DC", // Slightly darker gray for contrast
     },
     text: {
-      primary: "#2C3E50", // Dark slate color for primary text
-      secondary: "#7F8C8D", // Gray for secondary or placeholder text
+      primary: "#263238", // Deep navy for strong readability
+      secondary: "#546E7A", // Slate gray for secondary text
     },
     success: {
-      main: "#4CAF50", // Green for success indicators
+      main: "#43A047", // Muted green for success messages
       contrastText: "#FFFFFF",
     },
     warning: {
-      main: "#FFC107", // Yellow for warning indicators
+      main: "#FB8C00", // Warm amber for warnings
       contrastText: "#FFFFFF",
     },
     error: {
-      main: "#E53935", // Red for error messages
+      main: "#E53935", // Classic red for errors
       contrastText: "#FFFFFF",
     },
     info: {
-      main: "#29B6F6", // Cyan for informational messages
+      main: "#039BE5", // Bright but not overpowering cyan for info
       contrastText: "#FFFFFF",
     },
     common: {
@@ -42,79 +44,86 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: "'Poppins', 'Roboto', 'Arial', sans-serif", // Modern, clean fonts for headings and body text
+    fontFamily: "'Poppins', 'Roboto', 'Arial', sans-serif",
     h1: {
-      fontFamily: "'Roboto Slab', 'Arial', sans-serif", // Serif font for a polished, bold heading style
+      fontFamily: "'Merriweather', 'Arial', serif",
       fontSize: "2rem",
       fontWeight: 700,
-      color: "#2C3E50",
+      color: "#263238",
     },
     h2: {
       fontSize: "1.75rem",
       fontWeight: 600,
-      color: "#2C3E50",
+      color: "#263238",
     },
     h3: {
       fontSize: "1.5rem",
       fontWeight: 600,
-      color: "#2C3E50",
+      color: "#263238",
     },
     h4: {
       fontSize: "1.25rem",
       fontWeight: 600,
-      color: "#2C3E50",
+      color: "#263238",
     },
     body1: {
       fontSize: "1rem",
       fontFamily: "'Poppins', 'Arial', sans-serif",
-      color: "#34495E", // Slightly muted dark color for main body text
+      color: "#37474F",
     },
     body2: {
       fontSize: "0.875rem",
-      color: "#7F8C8D", // Lighter for secondary text
+      color: "#546E7A",
     },
     button: {
       fontSize: "0.875rem",
       fontWeight: 600,
-      textTransform: "capitalize", // Less all-caps to keep it friendly and readable
+      textTransform: "capitalize",
     },
     subtitle1: {
       fontSize: "1rem",
-      color: "#2C3E50",
+      color: "#263238",
       fontWeight: 500,
     },
   },
   shape: {
-    borderRadius: 8, // Slightly rounded corners for buttons, cards, and inputs
+    borderRadius: 10, // Slightly more rounded for a softer feel
   },
   components: {
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          color: "#263238",
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 8,
-          padding: "8px 16px", // Larger padding for better UX
+          borderRadius: 10,
+          padding: "8px 16px",
         },
       },
     },
     MuiAppBar: {
       styleOverrides: {
         colorPrimary: {
-          backgroundColor: "#1E88E5", // Matches the primary color
+          backgroundColor: "#00897B",
         },
       },
     },
     MuiCard: {
       styleOverrides: {
         root: {
-          borderRadius: 8,
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Light shadow for a soft, modern look
+          borderRadius: 10,
+          boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
         },
       },
     },
     MuiPaper: {
       styleOverrides: {
         rounded: {
-          borderRadius: 8,
+          borderRadius: 10,
         },
       },
     },

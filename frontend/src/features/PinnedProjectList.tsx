@@ -1,15 +1,17 @@
-import { Box, Icon, ListItem, Typography } from "@mui/material";
-import { useContext, useEffect } from "react";
+import { Box, Collapse, Icon, ListItem, Typography } from "@mui/material";
+import { useContext, useEffect, useState } from "react";
 import { Project } from "../types/project";
 import { deleteProject, getProjects } from "../api/projectService";
 import ProjectItem from "../components/ProjectItem";
 import { useSnackbar } from "notistack";
 import { ProjectContext } from "../contexts/projectContext";
-import PinnedIcon from "@mui/icons-material/PushPinRounded";
+import InlineContainer from "../components/InlineContainer";
+import ArrowIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 
 const PinnedProjectList = () => {
   const { projects, setProjects } = useContext(ProjectContext);
   const { enqueueSnackbar } = useSnackbar();
+  const [showPinned, setShowPinned] = useState(false);
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -38,35 +40,56 @@ const PinnedProjectList = () => {
     }
   };
 
+  const pinnedProjects = projects.filter((project) => project.isPinned);
+
   return (
     <Box
       sx={{
         display: "flex",
         flexDirection: "column",
-        gap: "1rem",
         marginTop: "1rem",
       }}
     >
-      <Icon>
-        <PinnedIcon sx={{ color: "common.white" }} />
-      </Icon>
-      {projects.length > 0 ? (
-        projects.map(
-          (project: Project) =>
-            project.isPinned && (
+      <InlineContainer
+        sx={{
+          borderRadius: "0.5rem",
+          cursor: pinnedProjects.length > 0 ? "pointer" : "default",
+          "&:hover": {
+            backgroundColor: "primary.light",
+            color: "primary.main",
+          },
+          transition: "0.2s",
+        }}
+        onClick={() => {
+          if (pinnedProjects.length > 0) {
+            setShowPinned(!showPinned);
+          }
+        }}
+      >
+        <Icon
+          sx={{
+            color: "inherit",
+            transform: showPinned ? "rotate(180deg)" : "rotate(0deg)",
+            transition: "transform 0.3s ease-in-out",
+          }}
+        >
+          <ArrowIcon fontSize="medium" />
+        </Icon>
+        <Typography color="inherit">Pinned Projects</Typography>
+      </InlineContainer>
+      <Collapse in={showPinned} timeout="auto" unmountOnExit>
+        <Box>
+          {projects.length > 0 &&
+            pinnedProjects.map((project: Project) => (
               <ListItem key={project.id}>
                 <ProjectItem
                   project={project}
                   onDelete={() => handleDelete(project.id)}
                 />
               </ListItem>
-            )
-        )
-      ) : (
-        <ListItem>
-          <Typography>No projects available</Typography>
-        </ListItem>
-      )}
+            ))}
+        </Box>
+      </Collapse>
     </Box>
   );
 };

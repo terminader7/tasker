@@ -1,6 +1,8 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Icon, Typography } from "@mui/material";
 import { Project } from "../types/project";
 import { useNavigate } from "react-router-dom";
+import PinnedIcon from "@mui/icons-material/PushPinRounded";
+import InlineContainer from "./InlineContainer";
 
 const ProjectItem = ({
   project,
@@ -16,23 +18,33 @@ const ProjectItem = ({
   };
 
   return (
-    <Box
+    <InlineContainer
       sx={{
-        display: "flex",
-        flexDirection: "column",
         borderRadius: "0.5rem",
         cursor: "pointer",
+        width: "100%",
         "&:hover": {
           backgroundColor: "primary.light",
+          color: "primary.main",
         },
         transition: "0.2s",
       }}
       onClick={handleClick}
     >
-      <Typography variant="body1" fontWeight={"bold"} color="common.white">
+      <Icon>
+        <PinnedIcon fontSize="small" />
+      </Icon>
+      <Typography
+        variant="body1"
+        fontWeight={500}
+        sx={{
+          borderBottom: "1px solid",
+          width: "100%",
+        }}
+      >
         {project.title}
       </Typography>
-    </Box>
+    </InlineContainer>
   );
 };
 

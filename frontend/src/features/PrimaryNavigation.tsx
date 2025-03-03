@@ -27,16 +27,16 @@ const PrimaryNavigation = () => {
       sx={{
         position: "fixed",
         left: 0,
-        backgroundColor: "primary.main",
+        backgroundColor: "background.paper",
         height: "100vh",
-        width: "15rem",
-        paddingLeft: "1rem",
+        width: "20%",
+        padding: "1rem",
       }}
     >
       <Typography
         sx={{
-          color: "primary.contrastText",
           fontSize: "1.5rem",
+          width: "100%",
           fontWeight: 600,
           marginTop: "1rem",
           ":hover": {
@@ -55,14 +55,14 @@ const PrimaryNavigation = () => {
         onClick={handleOpen}
         sx={{
           "&:hover": {
-            backgroundColor: "primary.light",
+            backgroundColor: "background",
             cursor: "pointer",
             transition: "0.3s",
           },
         }}
       >
-        <AddBoxIcon sx={{ fontSize: "1rem", color: "secondary.main" }} />
-        <Typography sx={{ color: "secondary.main", fontWeight: 600 }}>
+        <AddBoxIcon sx={{ fontSize: "1rem", color: "primary.main" }} />
+        <Typography sx={{ color: "primary.main", fontWeight: 600 }}>
           Create Project
         </Typography>
       </InlineContainer>
