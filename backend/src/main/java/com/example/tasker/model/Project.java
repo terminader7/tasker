@@ -36,6 +36,9 @@ public class Project {
     @Column(nullable = false)
     private boolean isPinned;
 
+    @Column(nullable = false)
+    private boolean isClosed;
+
 
     //Constructors
     public Project() {}
@@ -45,6 +48,7 @@ public class Project {
         this.description = description;
         this.tasks = tasks;
         this.isPinned = false;
+        this.isClosed = false;
     }
 
     //Getters and Setters
@@ -68,6 +72,9 @@ public class Project {
 
     public boolean getIsPinned() {return isPinned;}
     public void setIsPinned(boolean isPinned) {this.isPinned = isPinned;}
+
+    public boolean getIsClosed() {return isClosed;}
+    public void setIsClosed(boolean isClosed) {this.isClosed = isClosed;}
 
 
     //Pre persist will automatically set created at and updated at before the record is saved

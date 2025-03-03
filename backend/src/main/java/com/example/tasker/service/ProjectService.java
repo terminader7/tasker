@@ -36,6 +36,7 @@ public class ProjectService {
             project.setDescription(projectDetails.getDescription());
         }
             project.setIsPinned(projectDetails.getIsPinned());
+            project.setIsClosed(projectDetails.getIsClosed());
 
         return projectRepository.save(project);
     }
