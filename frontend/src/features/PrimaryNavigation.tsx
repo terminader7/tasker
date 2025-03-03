@@ -11,6 +11,7 @@ import UpcomingItems from "./UpcomingItems";
 import TodayItems from "./TodayItems";
 import IconContainer from "../components/IconContainer";
 import TaskerIcon from "@mui/icons-material/AssignmentRounded";
+import ProjectIcon from "@mui/icons-material/AccountTreeRounded";
 
 const PrimaryNavigation = () => {
   const [showForm, setShowForm] = useState(false);
@@ -115,14 +116,19 @@ const PrimaryNavigation = () => {
           marginTop: "3rem",
         }}
       >
-        <Typography
-          variant="body1"
-          sx={{
-            cursor: "default",
-          }}
-        >
-          My Projects
-        </Typography>
+        <InlineContainer>
+          <IconContainer>
+            <ProjectIcon fontSize="small" />
+          </IconContainer>
+          <Typography
+            variant="body1"
+            sx={{
+              cursor: "default",
+            }}
+          >
+            My Projects
+          </Typography>
+        </InlineContainer>
         <PinnedProjectList />
       </Box>
     </Box>

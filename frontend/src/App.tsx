@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import PrimaryNavigation from "./features/PrimaryNavigation";
 import { ProjectProvider } from "./contexts/projectContext";
-import ProjectsPage from "./features/ProjectsPage";
+import HomePage from "./features/HomePage";
 
 const App = () => {
   const theme = useTheme();
@@ -24,7 +24,7 @@ const App = () => {
         >
           <PrimaryNavigation />
           <Routes>
-            <Route path={"/"} element={<ProjectsPage />} />
+            <Route path={"/"} element={<HomePage />} />
             <Route path={"/:projectId"} element={<TaskList />} />
           </Routes>
         </Box>
