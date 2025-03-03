@@ -62,28 +62,20 @@ const TaskItem = ({
           Created on: {new Date(task.createdAt).toLocaleDateString()}
         </Typography>
       )}
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        {!showUpdateForm && (
-          <Button
-            sx={{
-              color: "primary.contrastText",
-              backgroundColor: "secondary.main",
-              position: "fixed",
-              alignSelf: "flex-end",
-            }}
-            onClick={() => {
-              setShowUpdateForm(true);
-            }}
-          >
-            Update
-          </Button>
-        )}
-      </Box>
+      {!showUpdateForm && (
+        <Button
+          sx={{
+            color: "primary.contrastText",
+            backgroundColor: "secondary.main",
+            alignSelf: "flex-end",
+          }}
+          onClick={() => {
+            setShowUpdateForm(true);
+          }}
+        >
+          Update
+        </Button>
+      )}
       {showUpdateForm && (
         <UpdateTaskForm
           task={task}

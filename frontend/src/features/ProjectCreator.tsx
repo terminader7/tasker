@@ -1,10 +1,8 @@
 import {
   Box,
-  Typography,
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogContentText,
   InputLabel,
   Input,
   Button,
