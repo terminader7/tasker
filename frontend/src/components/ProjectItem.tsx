@@ -1,8 +1,9 @@
-import { Icon, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { Project } from "../types/project";
 import { useNavigate } from "react-router-dom";
 import PinnedIcon from "@mui/icons-material/PushPinRounded";
 import InlineContainer from "./InlineContainer";
+import IconContainer from "./IconContainer";
 
 const ProjectItem = ({
   project,
@@ -31,12 +32,12 @@ const ProjectItem = ({
       }}
       onClick={handleClick}
     >
-      <Icon>
+      <IconContainer>
         <PinnedIcon fontSize="small" />
-      </Icon>
+      </IconContainer>
       <Typography
         variant="body1"
-        fontWeight={500}
+        color="inherit"
         sx={{
           borderBottom: "1px solid",
           width: "100%",

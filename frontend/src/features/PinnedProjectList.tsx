@@ -1,4 +1,4 @@
-import { Box, Collapse, Icon, ListItem, Typography } from "@mui/material";
+import { Box, Collapse, ListItem, Typography } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { Project } from "../types/project";
 import { deleteProject, getProjects } from "../api/projectService";
@@ -7,6 +7,7 @@ import { useSnackbar } from "notistack";
 import { ProjectContext } from "../contexts/projectContext";
 import InlineContainer from "../components/InlineContainer";
 import ArrowIcon from "@mui/icons-material/KeyboardArrowDownRounded";
+import IconContainer from "../components/IconContainer";
 
 const PinnedProjectList = () => {
   const { projects, setProjects } = useContext(ProjectContext);
@@ -47,7 +48,6 @@ const PinnedProjectList = () => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        marginTop: "1rem",
       }}
     >
       <InlineContainer
@@ -66,15 +66,18 @@ const PinnedProjectList = () => {
           }
         }}
       >
-        <Icon
+        <IconContainer
           sx={{
             color: "inherit",
-            transform: showPinned ? "rotate(180deg)" : "rotate(0deg)",
+            transform:
+              showPinned && pinnedProjects.length > 0
+                ? "rotate(180deg)"
+                : "rotate(0deg)",
             transition: "transform 0.3s ease-in-out",
           }}
         >
           <ArrowIcon fontSize="medium" />
-        </Icon>
+        </IconContainer>
         <Typography color="inherit">Pinned Projects</Typography>
       </InlineContainer>
       <Collapse in={showPinned} timeout="auto" unmountOnExit>

@@ -6,6 +6,9 @@ import ProjectCreator from "./ProjectCreator";
 import { Project } from "../types/project";
 import PinnedProjectList from "./PinnedProjectList";
 import { ProjectContext } from "../contexts/projectContext";
+import SearchBar from "./SearchBar";
+import UpcomingItems from "./UpcomingItems";
+import TodayItems from "./TodayItems";
 
 const PrimaryNavigation = () => {
   const [showForm, setShowForm] = useState(false);
@@ -39,6 +42,7 @@ const PrimaryNavigation = () => {
           width: "100%",
           fontWeight: 600,
           marginTop: "1rem",
+          borderRadius: ".5rem",
           ":hover": {
             cursor: "pointer",
             backgroundColor: "primary.light",
@@ -51,29 +55,52 @@ const PrimaryNavigation = () => {
       >
         Tasker
       </Typography>
-      <InlineContainer
-        onClick={handleOpen}
+      <Box
         sx={{
-          "&:hover": {
-            backgroundColor: "background",
-            cursor: "pointer",
-            transition: "0.3s",
-          },
+          display: "flex",
+          flexDirection: "column",
+          gap: ".5rem",
+          marginTop: "1rem",
         }}
       >
-        <AddBoxIcon sx={{ fontSize: "1rem", color: "primary.main" }} />
-        <Typography sx={{ color: "primary.main", fontWeight: 600 }}>
-          Create Project
-        </Typography>
-      </InlineContainer>
-      {showForm && (
-        <ProjectCreator
-          open={showForm}
-          onClose={handleClose}
-          onProjectCreated={handleProjectCreated}
-        />
-      )}
-      <PinnedProjectList />
+        <InlineContainer
+          onClick={handleOpen}
+          sx={{
+            borderRadius: ".5rem",
+            "&:hover": {
+              backgroundColor: "primary.light",
+              cursor: "pointer",
+              transition: "0.2s",
+            },
+          }}
+        >
+          <AddBoxIcon sx={{ fontSize: "1rem", color: "primary.main" }} />
+          <Typography sx={{ color: "primary.main", fontWeight: 600 }}>
+            Create Project
+          </Typography>
+        </InlineContainer>
+        {showForm && (
+          <ProjectCreator
+            open={showForm}
+            onClose={handleClose}
+            onProjectCreated={handleProjectCreated}
+          />
+        )}
+        <SearchBar />
+        <TodayItems />
+        <UpcomingItems />
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: ".5rem",
+          marginTop: "3rem",
+        }}
+      >
+        <Typography variant="body1">Projects</Typography>
+        <PinnedProjectList />
+      </Box>
     </Box>
   );
 };

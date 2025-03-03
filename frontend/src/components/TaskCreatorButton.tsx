@@ -8,7 +8,7 @@ const TaskCreatorButton = ({
   setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
 }) => (
   <Button variant="contained" onClick={() => setShowForm(!showForm)}>
-    {showForm ? "Close Form" : "Create New Task"}
+    {showForm ? "Close Form" : "Add Task"}
   </Button>
 );
 
