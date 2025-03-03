@@ -1,9 +1,15 @@
 import { Box, Button, List, ListItem, Typography } from "@mui/material";
 import { useContext, useEffect } from "react";
-import { getProjects, updateProject } from "../api/projectService";
+import {
+  deleteProject,
+  getProjects,
+  updateProject,
+} from "../api/projectService";
 import { Project } from "../types/project";
 import { useSnackbar } from "notistack";
 import { ProjectContext } from "../contexts/projectContext";
+import IconContainer from "../components/IconContainer";
+import DeleteIcon from "@mui/icons-material/DeleteForeverRounded";
 
 const ProjectsPage = () => {
   const { projects, setProjects } = useContext(ProjectContext);
@@ -41,6 +47,21 @@ const ProjectsPage = () => {
     }
   };
 
+  const handleDelete = async (id: Project["id"]) => {
+    try {
+      await deleteProject(id);
+      setProjects(projects.filter((project) => project.id !== id));
+      enqueueSnackbar("Project deleted", {
+        variant: "success",
+      });
+    } catch (error) {
+      console.error("Error deleting project", error);
+      enqueueSnackbar("Failed to delete project", {
+        variant: "error",
+      });
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -70,6 +91,16 @@ const ProjectsPage = () => {
                   >
                     {project?.title}
                   </Typography>
+                  <Button
+                    variant="contained"
+                    sx={{ backgroundColor: "error.main" }}
+                    onClick={() => handleDelete(project.id)}
+                  >
+                    <IconContainer>
+                      <DeleteIcon fontSize="small" />
+                    </IconContainer>
+                    Delete Project
+                  </Button>
                   <Button
                     variant="contained"
                     onClick={() =>

@@ -98,7 +98,7 @@ const PrimaryNavigation = () => {
           marginTop: "3rem",
         }}
       >
-        <Typography variant="body1">Projects</Typography>
+        <Typography variant="body1">My Projects</Typography>
         <PinnedProjectList />
       </Box>
     </Box>

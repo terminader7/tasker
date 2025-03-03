@@ -5,13 +5,7 @@ import PinnedIcon from "@mui/icons-material/PushPinRounded";
 import InlineContainer from "./InlineContainer";
 import IconContainer from "./IconContainer";
 
-const ProjectItem = ({
-  project,
-  onDelete,
-}: {
-  project: Project;
-  onDelete: () => void;
-}) => {
+const ProjectItem = ({ project }: { project: Project }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
