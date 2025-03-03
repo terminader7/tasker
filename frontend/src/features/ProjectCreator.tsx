@@ -43,6 +43,7 @@ const ProjectCreator = ({
     createdAt: new Date(),
     updatedAt: new Date(),
     isPinned: false,
+    isClosed: false,
   });
   const { enqueueSnackbar } = useSnackbar();
 
@@ -56,6 +57,7 @@ const ProjectCreator = ({
         createdAt: new Date(),
         updatedAt: new Date(),
         isPinned: false,
+        isClosed: false,
       });
       enqueueSnackbar("Project created!", {
         variant: "success",
