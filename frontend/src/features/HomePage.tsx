@@ -1,7 +1,7 @@
 import {
   Box,
   IconButton,
-  List,
+  Grid2,
   ListItem,
   Tooltip,
   Typography,
@@ -14,7 +14,6 @@ import ListIcon from "@mui/icons-material/FormatListBulleted";
 import GridIcon from "@mui/icons-material/GridOn";
 import ProjectCard from "../components/ProjectCard";
 import InlineContainer from "../components/InlineContainer";
-import Grid2 from "@mui/material/Grid2";
 
 const HomePage = () => {
   const { projects, setProjects } = useContext(ProjectContext);
@@ -38,13 +37,18 @@ const HomePage = () => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
+        padding: "2rem",
+        width: "100%",
+        marginLeft: "20%",
       }}
     >
       <InlineContainer gap=".5rem">
         <Typography variant="h6">My Projects</Typography>
-        <Tooltip title="Change List View" placement="top" arrow>
+        <Tooltip
+          title={showAsList ? "Change to Grid View" : "Change to List View"}
+          placement="top"
+          arrow
+        >
           <IconButton
             sx={{
               "&:hover": {
@@ -65,27 +69,23 @@ const HomePage = () => {
           </IconButton>
         </Tooltip>
       </InlineContainer>
-      <List>
+      <Grid2 container spacing={2} columns={16}>
         {projects.length > 0 ? (
           projects.map((project: Project) => {
             return showAsList ? (
-              <ListItem key={project.id}>
+              <Grid2 size={16} key={project.id}>
                 <ProjectCard project={project} />
-              </ListItem>
+              </Grid2>
             ) : (
-              <Grid2 container spacing={2} key={project.id}>
-                <Grid2 size={4}>
-                  <ProjectCard project={project} />
-                </Grid2>
+              <Grid2 size={{ xs: 16, sm: 8, md: 4 }}>
+                <ProjectCard project={project} />
               </Grid2>
             );
           })
         ) : (
-          <ListItem>
-            <Typography>No tasks available</Typography>
-          </ListItem>
+          <Typography>No Projects Available</Typography>
         )}
-      </List>
+      </Grid2>
     </Box>
   );
 };
