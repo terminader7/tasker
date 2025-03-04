@@ -6,6 +6,7 @@ import { Project } from "../types/project";
 import TaskForm from "../components/TaskForm";
 import TaskCreatorButton from "../components/TaskCreatorButton";
 import { getProjects } from "../api/projectService";
+import { Collapse } from "@mui/material";
 
 const TaskCreator = ({
   onTaskCreated,
@@ -69,7 +70,7 @@ const TaskCreator = ({
   return (
     <>
       <TaskCreatorButton showForm={showForm} setShowForm={setShowForm} />
-      {showForm && (
+      <Collapse in={showForm} timeout="auto" unmountOnExit>
         <TaskForm
           task={task}
           setTask={setTask}
@@ -77,7 +78,7 @@ const TaskCreator = ({
           handleCreateTask={handleCreateTask}
           isTaskValid={isTaskValid}
         />
-      )}
+      </Collapse>
     </>
   );
 };

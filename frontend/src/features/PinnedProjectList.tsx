@@ -26,8 +26,6 @@ const PinnedProjectList = () => {
 
   const pinnedProjects = projects.filter((project) => project.isPinned);
 
-  console.log({ pinnedProjects });
-
   return (
     <Box
       sx={{

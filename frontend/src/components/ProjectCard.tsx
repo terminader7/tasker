@@ -1,15 +1,28 @@
-import { Box, Button, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  Collapse,
+  IconButton,
+  LinearProgress,
+  Typography,
+} from "@mui/material";
 import IconContainer from "./IconContainer";
 import DeleteIcon from "@mui/icons-material/DeleteForeverRounded";
 import { Project } from "../types/project";
 import { useSnackbar } from "notistack";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ProjectContext } from "../contexts/projectContext";
 import { deleteProject, updateProject } from "../api/projectService";
 import PinIcon from "@mui/icons-material/PushPinRounded";
+import { Task, TaskStatus } from "../types/task";
+import EditIcon from "@mui/icons-material/Edit";
+import UpdateProjectForm from "../features/UpdateProjectForm";
+import InlineContainer from "./InlineContainer";
 
 const ProjectCard = ({ project }: { project: Project }) => {
   const { projects, setProjects } = useContext(ProjectContext);
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
 
   const handleUpdate = async (
@@ -44,23 +57,51 @@ const ProjectCard = ({ project }: { project: Project }) => {
       });
     }
   };
+
+  const getProjectTasksCompleted = projects.map((project: Project) => {
+    return project.tasks.reduce((taskCompleteCount, task: Task) => {
+      return task.status === TaskStatus.DONE
+        ? taskCompleteCount + 1
+        : taskCompleteCount;
+    }, 0);
+  });
+
+  const projectTasksCompletedCount = getProjectTasksCompleted[0];
+
   return (
-    <Box
+    <Card
       sx={{
-        border: "1px solid black",
+        backgroundColor: "common.white",
+        display: "flex",
+        flexDirection: "column",
+        gap: "2rem",
+        padding: "1rem",
       }}
     >
-      <Typography
+      <InlineContainer
         sx={{
-          cursor: "pointer",
-          "&:hover": {
-            backgroundColor: "primary.light",
-          },
-          transition: ".2s",
+          justifyContent: "space-between",
         }}
       >
-        {project?.title}
-      </Typography>
+        <Typography variant="h6">{project?.title}</Typography>
+        <Button
+          variant="outlined"
+          sx={{
+            color: project.isPinned ? "secondary.main" : "primary.main",
+            borderColor: project.isPinned ? "secondary.main" : "primary.main",
+          }}
+          onClick={() => {
+            handleUpdate(project.id, { isPinned: !project.isPinned });
+          }}
+        >
+          <PinIcon fontSize="small" />
+          {project.isPinned ? "Unpin" : "Pin"}
+        </Button>
+      </InlineContainer>
+      <LinearProgress
+        variant="determinate"
+        value={(projectTasksCompletedCount / project.tasks?.length) * 100}
+      />
       <Button
         variant="contained"
         sx={{ backgroundColor: "error.main" }}
@@ -73,16 +114,26 @@ const ProjectCard = ({ project }: { project: Project }) => {
       </Button>
       <Button
         variant="contained"
-        onClick={() =>
-          handleUpdate(project.id, { isPinned: !project.isPinned })
-        }
+        sx={{
+          backgroundColor: "primary.main",
+        }}
+        onClick={() => {
+          setShowUpdateForm(!showUpdateForm);
+        }}
       >
         <IconContainer>
-          <PinIcon fontSize="small" />
+          <EditIcon fontSize="small" />
         </IconContainer>
-        {project?.isPinned ? "Unpin Project" : "Pin Project"}
+        Edit Project
       </Button>
-    </Box>
+      <Collapse in={showUpdateForm} timeout="auto" unmountOnExit>
+        <UpdateProjectForm
+          project={project}
+          handleUpdate={handleUpdate}
+          setShowUpdateForm={setShowUpdateForm}
+        />
+      </Collapse>
+    </Card>
   );
 };
 

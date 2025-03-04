@@ -1,4 +1,10 @@
-import { Button, IconButton, Typography, Tooltip } from "@mui/material";
+import {
+  Button,
+  IconButton,
+  Typography,
+  Tooltip,
+  Collapse,
+} from "@mui/material";
 import { Task } from "../types/task";
 import { useTheme } from "@mui/material/styles";
 import DeleteIcon from "@mui/icons-material/DeleteForeverRounded";
@@ -75,13 +81,13 @@ const TaskItem = ({
           Update
         </Button>
       )}
-      {showUpdateForm && (
+      <Collapse in={showUpdateForm} timeout="auto" unmountOnExit>
         <UpdateTaskForm
           task={task}
           handleUpdate={handleUpdate}
           setShowUpdateForm={setShowUpdateForm}
         />
-      )}
+      </Collapse>
     </InlineContainer>
   );
 };

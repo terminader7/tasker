@@ -1,11 +1,4 @@
-import {
-  Box,
-  IconButton,
-  Grid2,
-  ListItem,
-  Tooltip,
-  Typography,
-} from "@mui/material";
+import { Box, IconButton, Grid2, Tooltip, Typography } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { getProjects } from "../api/projectService";
 import { Project } from "../types/project";
@@ -77,7 +70,7 @@ const HomePage = () => {
                 <ProjectCard project={project} />
               </Grid2>
             ) : (
-              <Grid2 size={{ xs: 16, sm: 8, md: 4 }}>
+              <Grid2 size={{ xs: 16, sm: 8, md: 4 }} key={project.id}>
                 <ProjectCard project={project} />
               </Grid2>
             );

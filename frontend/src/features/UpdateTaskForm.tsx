@@ -67,9 +67,10 @@ const UpdateTaskForm = ({
       />
       <InlineContainer>
         <Button
+          variant="outlined"
           sx={{
-            color: "primary.contrastText",
-            backgroundColor: "secondary.main",
+            color: "secondary.main",
+            borderColor: "secondary.main",
           }}
           onClick={() => {
             setShowUpdateForm(false);
@@ -78,8 +79,8 @@ const UpdateTaskForm = ({
           Cancel
         </Button>
         <Button
+          variant="contained"
           sx={{
-            color: "primary.contrastText",
             backgroundColor: "primary.main",
           }}
           onClick={() => {
