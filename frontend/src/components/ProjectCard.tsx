@@ -1,16 +1,18 @@
 import {
+  Box,
   Button,
   Card,
   Collapse,
   LinearProgress,
   Typography,
+  useTheme,
 } from "@mui/material";
 import IconContainer from "./IconContainer";
 import DeleteIcon from "@mui/icons-material/DeleteForeverRounded";
 import { Project } from "../types/project";
 import { useSnackbar } from "notistack";
 import { useContext, useState } from "react";
-import { ProjectContext } from "../contexts/projectContext";
+import { projectContext } from "../contexts/projectContext";
 import { deleteProject, updateProject } from "../api/projectService";
 import PinIcon from "@mui/icons-material/PushPinRounded";
 import { Task, TaskStatus } from "../types/task";
@@ -18,10 +20,17 @@ import EditIcon from "@mui/icons-material/Edit";
 import UpdateProjectForm from "../features/UpdateProjectForm";
 import InlineContainer from "./InlineContainer";
 
-const ProjectCard = ({ project }: { project: Project }) => {
-  const { projects, setProjects } = useContext(ProjectContext);
+const ProjectCard = ({
+  project,
+  showAsList,
+}: {
+  project: Project;
+  showAsList: boolean;
+}) => {
+  const { projects, setProjects } = useContext(projectContext);
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
+  const theme = useTheme();
 
   const handleUpdate = async (
     id: Project["id"],
@@ -66,22 +75,29 @@ const ProjectCard = ({ project }: { project: Project }) => {
 
   const projectTasksCompletedCount = getProjectTasksCompleted[0];
 
+  console.log({ project });
+
   return (
     <Card
       sx={{
         backgroundColor: "common.white",
         display: "flex",
-        flexDirection: "column",
+        flexDirection: showAsList ? "row" : "column",
         gap: "2rem",
-        padding: "1rem",
+        padding: theme.spacing(2),
+        justifyContent: showAsList ? "space-between" : "center",
+        height: showAsList ? "4rem" : "12rem",
       }}
     >
       <InlineContainer
         sx={{
           justifyContent: "space-between",
+          gap: "2rem",
         }}
       >
-        <Typography variant="h6">{project?.title}</Typography>
+        <Typography variant="h6" fontWeight={600}>
+          {project?.title}
+        </Typography>
         <Button
           variant="outlined"
           sx={{
@@ -100,30 +116,32 @@ const ProjectCard = ({ project }: { project: Project }) => {
         variant="determinate"
         value={(projectTasksCompletedCount / project.tasks?.length) * 100}
       />
-      <Button
-        variant="contained"
-        sx={{ backgroundColor: "error.main" }}
-        onClick={() => handleDelete(project.id)}
-      >
-        <IconContainer>
-          <DeleteIcon fontSize="small" />
-        </IconContainer>
-        Delete Project
-      </Button>
-      <Button
-        variant="contained"
-        sx={{
-          backgroundColor: "primary.main",
-        }}
-        onClick={() => {
-          setShowUpdateForm(!showUpdateForm);
-        }}
-      >
-        <IconContainer>
-          <EditIcon fontSize="small" />
-        </IconContainer>
-        Edit Project
-      </Button>
+      <InlineContainer sx={{ gap: "2rem", justifyContent: "center" }}>
+        <Button
+          variant="contained"
+          sx={{
+            backgroundColor: "primary.main",
+          }}
+          onClick={() => {
+            setShowUpdateForm(!showUpdateForm);
+          }}
+        >
+          <IconContainer>
+            <EditIcon fontSize="small" />
+          </IconContainer>
+          Edit
+        </Button>
+        <Button
+          variant="contained"
+          sx={{ backgroundColor: "error.main" }}
+          onClick={() => handleDelete(project.id)}
+        >
+          <IconContainer>
+            <DeleteIcon fontSize="small" />
+          </IconContainer>
+          Delete
+        </Button>
+      </InlineContainer>
       <Collapse in={showUpdateForm} timeout="auto" unmountOnExit>
         <UpdateProjectForm
           project={project}

@@ -9,13 +9,13 @@ import TaskCreator from "./TaskCreator";
 import { Box } from "@mui/material";
 import { useSnackbar } from "notistack";
 import { useParams } from "react-router-dom";
-import { ProjectContext } from "../contexts/projectContext";
+import { projectContext } from "../contexts/projectContext";
 
 const TaskList = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const { enqueueSnackbar } = useSnackbar();
   const { projectId } = useParams<{ projectId: string }>();
-  const { projects, setProjectId } = useContext(ProjectContext);
+  const { projects, setProjectId } = useContext(projectContext);
 
   useEffect(() => {
     setProjectId(projectId);

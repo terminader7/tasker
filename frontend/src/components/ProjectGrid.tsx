@@ -17,8 +17,11 @@ const ProjectGrid = ({ projects, showAsList }: ProjectGridProps) => {
         <Grid2
           key={project.id}
           size={showAsList ? 16 : { xs: 16, sm: 8, md: 4 }}
+          sx={{
+            width: "50%",
+          }}
         >
-          <ProjectCard project={project} />
+          <ProjectCard project={project} showAsList={showAsList} />
         </Grid2>
       ))}
     </Grid2>

@@ -5,7 +5,7 @@ import { useContext, useState } from "react";
 import ProjectCreator from "./ProjectCreator";
 import { Project } from "../types/project";
 import PinnedProjectList from "./PinnedProjectList";
-import { ProjectContext } from "../contexts/projectContext";
+import { projectContext } from "../contexts/projectContext";
 import SearchBar from "./SearchBar";
 import UpcomingItems from "./UpcomingItems";
 import TodayItems from "./TodayItems";
@@ -15,7 +15,7 @@ import ProjectIcon from "@mui/icons-material/AccountTreeRounded";
 
 const PrimaryNavigation = () => {
   const [showForm, setShowForm] = useState(false);
-  const { setProjects } = useContext(ProjectContext);
+  const { setProjects } = useContext(projectContext);
 
   const handleProjectCreated = (newProject: Project) => {
     setProjects((prevProjects) => [...prevProjects, newProject]);

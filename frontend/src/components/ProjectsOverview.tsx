@@ -1,7 +1,7 @@
 import { Box, IconButton, Tooltip, Typography } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { getProjects } from "../api/projectService";
-import { ProjectContext } from "../contexts/projectContext";
+import { projectContext } from "../contexts/projectContext";
 import ListIcon from "@mui/icons-material/FormatListBulleted";
 import GridIcon from "@mui/icons-material/GridOn";
 import ProjectGrid from "./ProjectGrid";
@@ -9,7 +9,7 @@ import InlineContainer from "../components/InlineContainer";
 
 const ProjectsOverview = () => {
   const { projects, setProjects, filteredProjects, searchQuery } =
-    useContext(ProjectContext);
+    useContext(projectContext);
   const [showAsList, setShowAsList] = useState(false);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const ProjectsOverview = () => {
       <InlineContainer gap=".5rem">
         <Typography variant="h6">My Projects</Typography>
         <Tooltip
-          title={showAsList ? "Change to Grid View" : "Change to List View"}
+          title={showAsList ? "Go to Grid View" : "Go to List View"}
           placement="top"
           arrow
         >

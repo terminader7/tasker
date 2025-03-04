@@ -3,11 +3,11 @@ import InlineContainer from "../components/InlineContainer";
 import SearchIcon from "@mui/icons-material/SearchRounded";
 import IconContainer from "../components/IconContainer";
 import { useContext, useState } from "react";
-import { ProjectContext } from "../contexts/projectContext";
+import { projectContext } from "../contexts/projectContext";
 
 const SearchBar = () => {
   const [showSearch, setShowSearch] = useState(false);
-  const { searchQuery, setSearchQuery } = useContext(ProjectContext);
+  const { searchQuery, setSearchQuery } = useContext(projectContext);
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>

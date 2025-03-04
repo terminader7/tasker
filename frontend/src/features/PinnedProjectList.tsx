@@ -3,13 +3,13 @@ import { useContext, useEffect, useState } from "react";
 import { Project } from "../types/project";
 import { getProjects } from "../api/projectService";
 import ProjectItem from "../components/ProjectItem";
-import { ProjectContext } from "../contexts/projectContext";
+import { projectContext } from "../contexts/projectContext";
 import InlineContainer from "../components/InlineContainer";
 import ArrowIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 import IconContainer from "../components/IconContainer";
 
 const PinnedProjectList = () => {
-  const { projects, setProjects } = useContext(ProjectContext);
+  const { projects, setProjects } = useContext(projectContext);
   const [showPinned, setShowPinned] = useState(false);
 
   useEffect(() => {

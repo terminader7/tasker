@@ -16,7 +16,7 @@ export interface IProjectContext {
 
 const minSearchLength = 2;
 
-export const ProjectContext = React.createContext<IProjectContext>({
+export const projectContext = React.createContext<IProjectContext>({
   projects: [],
   setProjects: () => null,
   loading: false,
@@ -95,7 +95,7 @@ export const ProjectProvider = ({
       const task = project.tasks[i];
       let taskSearchQueryIndex = 0;
       for (let j = 0; j < task.title.length; j++) {
-        let titleSubString = task.title[j].toLocaleUpperCase();
+        let titleSubString = task.title[j].toLowerCase();
 
         if (titleSubString === lowerCaseSearchQuery[taskSearchQueryIndex]) {
           taskSearchQueryIndex += 1;
@@ -112,7 +112,7 @@ export const ProjectProvider = ({
   });
 
   return (
-    <ProjectContext.Provider
+    <projectContext.Provider
       value={{
         projects,
         setProjects,
@@ -126,6 +126,6 @@ export const ProjectProvider = ({
       }}
     >
       {children}
-    </ProjectContext.Provider>
+    </projectContext.Provider>
   );
 };
