@@ -8,7 +8,8 @@ import ProjectGrid from "./ProjectGrid";
 import InlineContainer from "../components/InlineContainer";
 
 const ProjectsOverview = () => {
-  const { projects, setProjects } = useContext(ProjectContext);
+  const { projects, setProjects, filteredProjects, searchQuery } =
+    useContext(ProjectContext);
   const [showAsList, setShowAsList] = useState(false);
 
   useEffect(() => {
@@ -32,7 +33,6 @@ const ProjectsOverview = () => {
         width: "100%",
       }}
     >
-      {/* Header & View Toggle */}
       <InlineContainer gap=".5rem">
         <Typography variant="h6">My Projects</Typography>
         <Tooltip
@@ -55,9 +55,10 @@ const ProjectsOverview = () => {
           </IconButton>
         </Tooltip>
       </InlineContainer>
-
-      {/* Project Display */}
-      <ProjectGrid projects={projects} showAsList={showAsList} />
+      <ProjectGrid
+        projects={searchQuery.length ? filteredProjects : projects}
+        showAsList={showAsList}
+      />
     </Box>
   );
 };

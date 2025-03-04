@@ -38,6 +38,7 @@ const ProjectCreator = ({
   const [project, setProject] = useState<NewProject>({
     title: "",
     description: "",
+    tasks: [],
     createdAt: new Date(),
     updatedAt: new Date(),
     isPinned: false,
@@ -52,6 +53,7 @@ const ProjectCreator = ({
       setProject({
         title: "",
         description: "",
+        tasks: [],
         createdAt: new Date(),
         updatedAt: new Date(),
         isPinned: false,

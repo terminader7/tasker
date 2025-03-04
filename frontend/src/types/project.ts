@@ -11,4 +11,4 @@ export interface Project {
   isClosed: boolean;
 }
 
-export type NewProject = Omit<Project, "id" | "tasks">;
+export type NewProject = Omit<Project, "id">;
