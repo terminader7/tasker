@@ -11,6 +11,7 @@ const ProjectsOverview = () => {
   const { projects, setProjects, filteredProjects, searchQuery } =
     useContext(projectContext);
   const [showAsList, setShowAsList] = useState(false);
+  const [showAsList2, setShowAsList2] = useState(false);
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -77,7 +78,7 @@ const ProjectsOverview = () => {
               "&:hover": { color: "secondary.main", cursor: "pointer" },
               transition: ".2s",
             }}
-            onClick={() => setShowAsList(!showAsList)}
+            onClick={() => setShowAsList2(!showAsList2)}
           >
             {showAsList ? (
               <ListIcon fontSize="medium" />
@@ -87,7 +88,7 @@ const ProjectsOverview = () => {
           </IconButton>
         </Tooltip>
       </InlineContainer>
-      <ProjectGrid projects={closedProjects} showAsList={showAsList} />
+      <ProjectGrid projects={closedProjects} showAsList={showAsList2} />
     </Box>
   );
 };

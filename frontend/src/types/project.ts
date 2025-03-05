@@ -7,6 +7,7 @@ export interface Project {
   tasks: Task[];
   createdAt: Date;
   updatedAt: Date;
+  dueDate?: Date | null;
   isPinned: boolean;
   isClosed: boolean;
 }
