@@ -12,6 +12,7 @@ import TodayItems from "./TodayItems";
 import IconContainer from "../components/IconContainer";
 import TaskerIcon from "@mui/icons-material/AssignmentRounded";
 import ProjectIcon from "@mui/icons-material/AccountTreeRounded";
+import ClosedProjectList from "./ClosedProjectList";
 
 const PrimaryNavigation = () => {
   const [showForm, setShowForm] = useState(false);
@@ -130,6 +131,7 @@ const PrimaryNavigation = () => {
           </Typography>
         </InlineContainer>
         <PinnedProjectList />
+        <ClosedProjectList />
       </Box>
     </Box>
   );

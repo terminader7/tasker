@@ -1,4 +1,4 @@
-import { Typography, Grid2 } from "@mui/material";
+import { Typography, Grid2, useTheme } from "@mui/material";
 import ProjectCard from "./ProjectCard";
 import { Project } from "../types/project";
 
@@ -8,6 +8,7 @@ interface ProjectGridProps {
 }
 
 const ProjectGrid = ({ projects, showAsList }: ProjectGridProps) => {
+  const theme = useTheme();
   if (projects.length === 0)
     return <Typography>No Projects Available</Typography>;
 
@@ -16,7 +17,11 @@ const ProjectGrid = ({ projects, showAsList }: ProjectGridProps) => {
       {projects.map((project) => (
         <Grid2
           key={project.id}
-          size={showAsList ? 16 : { xs: 16, sm: 8, md: 4 }}
+          size={
+            showAsList && theme.breakpoints.down("xs")
+              ? 16
+              : { xs: 16, sm: 8, md: 4 }
+          }
           sx={{
             width: "50%",
           }}

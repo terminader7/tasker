@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Card,
   Collapse,
@@ -73,9 +72,7 @@ const ProjectCard = ({
     }, 0);
   });
 
-  const projectTasksCompletedCount = getProjectTasksCompleted[0];
-
-  console.log({ project });
+  const completedTaskCount = getProjectTasksCompleted[0];
 
   return (
     <Card
@@ -86,7 +83,7 @@ const ProjectCard = ({
         gap: "2rem",
         padding: theme.spacing(2),
         justifyContent: showAsList ? "space-between" : "center",
-        height: showAsList ? "4rem" : "12rem",
+        height: showAsList ? "4rem" : "fit-content",
       }}
     >
       <InlineContainer
@@ -114,7 +111,7 @@ const ProjectCard = ({
       </InlineContainer>
       <LinearProgress
         variant="determinate"
-        value={(projectTasksCompletedCount / project.tasks?.length) * 100}
+        value={(completedTaskCount / project.tasks?.length) * 100}
       />
       <InlineContainer sx={{ gap: "2rem", justifyContent: "center" }}>
         <Button

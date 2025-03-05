@@ -7,11 +7,11 @@ import { projectContext } from "../contexts/projectContext";
 import InlineContainer from "../components/InlineContainer";
 import ArrowIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 import IconContainer from "../components/IconContainer";
-import PinIcon from "@mui/icons-material/PushPinRounded";
+import CloseIcon from "@mui/icons-material/Block";
 
-const PinnedProjectList = () => {
+const ClosedProjectList = () => {
   const { projects, setProjects } = useContext(projectContext);
-  const [showPinned, setShowPinned] = useState(false);
+  const [showClosed, setShowClosed] = useState(false);
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -25,7 +25,7 @@ const PinnedProjectList = () => {
     fetchProjects();
   }, [setProjects]);
 
-  const pinnedProjects = projects.filter((project) => project.isPinned);
+  const closedProjects = projects.filter((project) => project.isClosed);
 
   return (
     <Box
@@ -37,7 +37,7 @@ const PinnedProjectList = () => {
       <InlineContainer
         sx={{
           borderRadius: "0.5rem",
-          cursor: pinnedProjects.length > 0 ? "pointer" : "default",
+          cursor: closedProjects.length > 0 ? "pointer" : "default",
           "&:hover": {
             backgroundColor: "primary.light",
             color: "primary.main",
@@ -45,8 +45,8 @@ const PinnedProjectList = () => {
           transition: "0.2s",
         }}
         onClick={() => {
-          if (pinnedProjects.length > 0) {
-            setShowPinned(!showPinned);
+          if (closedProjects.length > 0) {
+            setShowClosed(!showClosed);
           }
         }}
       >
@@ -54,7 +54,7 @@ const PinnedProjectList = () => {
           sx={{
             color: "inherit",
             transform:
-              showPinned && pinnedProjects.length > 0
+              showClosed && closedProjects.length > 0
                 ? "rotate(180deg)"
                 : "rotate(0deg)",
             transition: "transform 0.3s ease-in-out",
@@ -62,16 +62,16 @@ const PinnedProjectList = () => {
         >
           <ArrowIcon fontSize="medium" />
         </IconContainer>
-        <Typography color="inherit">Pinned Projects</Typography>
+        <Typography color="inherit">Closed Projects</Typography>
       </InlineContainer>
-      <Collapse in={showPinned} timeout="auto" unmountOnExit>
+      <Collapse in={showClosed} timeout="auto" unmountOnExit>
         <Box>
           {projects.length > 0 &&
-            pinnedProjects.map((project: Project) => (
+            closedProjects.map((project: Project) => (
               <ListItem key={project.id}>
                 <ProjectItem
                   project={project}
-                  icon={<PinIcon fontSize="small" />}
+                  icon={<CloseIcon fontSize="small" />}
                 />
               </ListItem>
             ))}
@@ -81,4 +81,4 @@ const PinnedProjectList = () => {
   );
 };
 
-export default PinnedProjectList;
+export default ClosedProjectList;

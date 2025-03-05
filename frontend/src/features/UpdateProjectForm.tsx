@@ -1,9 +1,9 @@
 import { Box, Button, TextField } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import InlineContainer from "../components/InlineContainer";
 import { Project } from "../types/project";
 import IconContainer from "../components/IconContainer";
-import CloseIcon from "@mui/icons-material/BlindsClosed";
+import CloseIcon from "@mui/icons-material/Block";
 
 const UpdateProjectForm = ({
   project,
@@ -17,11 +17,24 @@ const UpdateProjectForm = ({
   const [updatedProject, setupdatedProject] = useState<Partial<Project>>({
     title: project.title,
     description: project.description,
-    isPinned: project.isPinned,
     isClosed: project.isClosed,
+    isPinned: project.isPinned,
   });
 
-  const handleInputChange = (field: keyof Project, value: string) => {
+  // Work around small use case where user pins project while having the update form open
+  useEffect(() => {
+    setupdatedProject({
+      title: project.title,
+      description: project.description,
+      isClosed: project.isClosed,
+      isPinned: project.isPinned,
+    });
+  }, [project]);
+
+  const handleInputChange = <K extends keyof Project>(
+    field: K,
+    value: Project[K]
+  ) => {
     setupdatedProject((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -30,6 +43,7 @@ const UpdateProjectForm = ({
     setShowUpdateForm(false);
   };
 
+  console.log({ updatedProject });
   return (
     <Box>
       <TextField
@@ -47,14 +61,12 @@ const UpdateProjectForm = ({
         sx={{
           backgroundColor: "secondary.main",
         }}
-        onClick={() =>
-          handleUpdate(project.id, { isClosed: !project.isClosed })
-        }
+        onClick={() => handleInputChange("isClosed", !updatedProject.isClosed)}
       >
         <IconContainer>
           <CloseIcon fontSize="small" />
         </IconContainer>
-        {project?.isClosed ? "Open Project" : "Close Project"}
+        {updatedProject?.isClosed ? "Open Project" : "Close Project"}
       </Button>
       <InlineContainer>
         <Button
