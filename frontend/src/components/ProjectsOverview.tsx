@@ -25,6 +25,12 @@ const ProjectsOverview = () => {
     fetchProjects();
   }, [setProjects]);
 
+  const closedProjects = projects.filter((project) => {
+    return project.isClosed;
+  });
+
+  console.log({ closedProjects });
+
   return (
     <Box
       sx={{
@@ -59,6 +65,29 @@ const ProjectsOverview = () => {
         projects={searchQuery.length ? filteredProjects : projects}
         showAsList={showAsList}
       />
+      <InlineContainer gap=".5rem" marginTop="5rem">
+        <Typography variant="h6">Closed Projects</Typography>
+        <Tooltip
+          title={showAsList ? "Go to Grid View" : "Go to List View"}
+          placement="top"
+          arrow
+        >
+          <IconButton
+            sx={{
+              "&:hover": { color: "secondary.main", cursor: "pointer" },
+              transition: ".2s",
+            }}
+            onClick={() => setShowAsList(!showAsList)}
+          >
+            {showAsList ? (
+              <ListIcon fontSize="medium" />
+            ) : (
+              <GridIcon fontSize="medium" />
+            )}
+          </IconButton>
+        </Tooltip>
+      </InlineContainer>
+      <ProjectGrid projects={closedProjects} showAsList={showAsList} />
     </Box>
   );
 };

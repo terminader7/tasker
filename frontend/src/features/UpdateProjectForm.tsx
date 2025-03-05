@@ -39,6 +39,9 @@ const UpdateProjectForm = ({
   };
 
   const handleSubmit = () => {
+    if (updatedProject.isClosed) {
+      updatedProject.isPinned = false;
+    }
     handleUpdate(project.id, updatedProject);
     setShowUpdateForm(false);
   };

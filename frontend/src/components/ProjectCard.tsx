@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Card,
   Collapse,
@@ -18,6 +19,7 @@ import { Task, TaskStatus } from "../types/task";
 import EditIcon from "@mui/icons-material/Edit";
 import UpdateProjectForm from "../features/UpdateProjectForm";
 import InlineContainer from "./InlineContainer";
+import StatusChip from "./StatusChip";
 
 const ProjectCard = ({
   project,
@@ -77,13 +79,14 @@ const ProjectCard = ({
   return (
     <Card
       sx={{
-        backgroundColor: "common.white",
+        backgroundColor: project.isClosed ? "grey.300" : "common.white",
         display: "flex",
         flexDirection: showAsList ? "row" : "column",
         gap: "2rem",
         padding: theme.spacing(2),
         justifyContent: showAsList ? "space-between" : "center",
-        height: showAsList ? "4rem" : "fit-content",
+        minHeight: showAsList ? "4rem" : "12rem",
+        position: "relative",
       }}
     >
       <InlineContainer
@@ -92,22 +95,27 @@ const ProjectCard = ({
           gap: "2rem",
         }}
       >
-        <Typography variant="h6" fontWeight={600}>
-          {project?.title}
-        </Typography>
-        <Button
-          variant="outlined"
-          sx={{
-            color: project.isPinned ? "secondary.main" : "primary.main",
-            borderColor: project.isPinned ? "secondary.main" : "primary.main",
-          }}
-          onClick={() => {
-            handleUpdate(project.id, { isPinned: !project.isPinned });
-          }}
-        >
-          <PinIcon fontSize="small" />
-          {project.isPinned ? "Unpin" : "Pin"}
-        </Button>
+        <Box>
+          <Typography variant="h6" fontWeight={600}>
+            {project?.title}
+          </Typography>
+          <StatusChip label={project.isClosed ? "closed" : "active"} />
+        </Box>
+        {!project.isClosed && (
+          <Button
+            variant="outlined"
+            sx={{
+              color: project.isPinned ? "secondary.main" : "primary.main",
+              borderColor: project.isPinned ? "secondary.main" : "primary.main",
+            }}
+            onClick={() => {
+              handleUpdate(project.id, { isPinned: !project.isPinned });
+            }}
+          >
+            <PinIcon fontSize="small" />
+            {project.isPinned ? "Unpin" : "Pin"}
+          </Button>
+        )}
       </InlineContainer>
       <LinearProgress
         variant="determinate"

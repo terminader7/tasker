@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import { Task } from "../types/task";
 import Typography from "@mui/material/Typography";
 import TaskCreator from "./TaskCreator";
-import { Box, useTheme } from "@mui/material";
+import { Box } from "@mui/material";
 import { useSnackbar } from "notistack";
 import { useParams } from "react-router-dom";
 import { projectContext } from "../contexts/projectContext";
@@ -17,7 +17,6 @@ const TaskList = () => {
   const { enqueueSnackbar } = useSnackbar();
   const { projectId } = useParams<{ projectId: string }>();
   const { projects, setProjectId } = useContext(projectContext);
-  const theme = useTheme();
 
   useEffect(() => {
     setProjectId(projectId);

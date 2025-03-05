@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     /* Language and Environment */
-    "target": "es2016",
+    "target": "es2021",
     "jsx": "react-jsx", // Change this to 'react-jsx' for React 17+ to enable new JSX transform
 
     /* Modules */
