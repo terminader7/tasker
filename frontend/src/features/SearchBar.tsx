@@ -42,7 +42,7 @@ const SearchBar = () => {
       </InlineContainer>
       <Collapse in={showSearch} timeout="auto" unmountOnExit>
         <TextField
-          placeholder="Search..."
+          placeholder="Search by Project..."
           variant="outlined"
           size="small"
           sx={{

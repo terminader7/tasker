@@ -6,16 +6,18 @@ import { useContext, useEffect, useState } from "react";
 import { Task } from "../types/task";
 import Typography from "@mui/material/Typography";
 import TaskCreator from "./TaskCreator";
-import { Box } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import { useSnackbar } from "notistack";
 import { useParams } from "react-router-dom";
 import { projectContext } from "../contexts/projectContext";
+import PageContainer from "../components/PageContainer";
 
 const TaskList = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const { enqueueSnackbar } = useSnackbar();
   const { projectId } = useParams<{ projectId: string }>();
   const { projects, setProjectId } = useContext(projectContext);
+  const theme = useTheme();
 
   useEffect(() => {
     setProjectId(projectId);
@@ -81,16 +83,9 @@ const TaskList = () => {
   );
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <TaskCreator onTaskCreated={handleTaskCreated} />
+    <PageContainer>
       {project?.title && <Typography variant="h4">{project.title}</Typography>}
+      <TaskCreator onTaskCreated={handleTaskCreated} />
       <List
         sx={{
           display: "flex",
@@ -103,7 +98,6 @@ const TaskList = () => {
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center",
               }}
               key={task.id}
             >
@@ -122,7 +116,7 @@ const TaskList = () => {
           </ListItem>
         )}
       </List>
-    </Box>
+    </PageContainer>
   );
 };
 

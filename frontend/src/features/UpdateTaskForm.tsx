@@ -6,6 +6,7 @@ import {
   MenuItem,
   Select,
   TextField,
+  Typography,
 } from "@mui/material";
 import { useState } from "react";
 import InlineContainer from "../components/InlineContainer";
@@ -39,6 +40,9 @@ const UpdateTaskForm = ({
 
   return (
     <Box>
+      <Typography variant="h6" fontWeight={600}>
+        Update Task
+      </Typography>
       <TextField
         label="Title"
         value={updatedTask.title}

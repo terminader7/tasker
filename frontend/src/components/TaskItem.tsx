@@ -4,6 +4,7 @@ import {
   Typography,
   Tooltip,
   Collapse,
+  Card,
 } from "@mui/material";
 import { Task } from "../types/task";
 import { useTheme } from "@mui/material/styles";
@@ -25,62 +26,64 @@ const TaskItem = ({
   const [showUpdateForm, setShowUpdateForm] = useState(false);
 
   return (
-    <InlineContainer
+    <Card
       sx={{
-        borderRadius: "5px",
+        display: "flex",
+        flexDirection: "column",
         gap: "1rem",
-        backgroundColor: theme.palette.common.white,
-        padding: "1rem",
-        boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
+        backgroundColor: "common.white",
+        padding: theme.spacing(2),
       }}
     >
-      <Tooltip title="Delete task">
-        <IconButton
-          sx={{
-            alignSelf: "flex-end",
-            posiiton: "fixed",
-            color: "error.main",
-          }}
-          onClick={onDelete}
-        >
-          <DeleteIcon />
-        </IconButton>
-      </Tooltip>
-      <Typography fontWeight={600}>{task.title}</Typography>
-      <Typography variant="body1">{task.status}</Typography>
-      {task.description && (
-        <Typography variant="body1">{task.description}</Typography>
-      )}
-      {task.dueDate && (
-        <Typography
-          variant="body2"
-          sx={{ color: "secondary.main", fontWeight: 600 }}
-        >
-          Due: {new Date(task.dueDate).toLocaleDateString()}
-        </Typography>
-      )}
-      {task.createdAt && (
-        <Typography
-          variant="body2"
-          sx={{ color: "secondary.main", fontWeight: 600 }}
-        >
-          Created on: {new Date(task.createdAt).toLocaleDateString()}
-        </Typography>
-      )}
-      {!showUpdateForm && (
-        <Button
-          sx={{
-            color: "primary.contrastText",
-            backgroundColor: "secondary.main",
-            alignSelf: "flex-end",
-          }}
-          onClick={() => {
-            setShowUpdateForm(true);
-          }}
-        >
-          Update
-        </Button>
-      )}
+      <InlineContainer sx={{}}>
+        <Tooltip title="Delete task">
+          <IconButton
+            sx={{
+              alignSelf: "flex-end",
+              posiiton: "fixed",
+              color: "error.main",
+            }}
+            onClick={onDelete}
+          >
+            <DeleteIcon />
+          </IconButton>
+        </Tooltip>
+        <Typography fontWeight={600}>{task.title}</Typography>
+        <Typography variant="body1">{task.status}</Typography>
+        {task.description && (
+          <Typography variant="body1">{task.description}</Typography>
+        )}
+        {task.dueDate && (
+          <Typography
+            variant="body2"
+            sx={{ color: "secondary.main", fontWeight: 600 }}
+          >
+            Due: {new Date(task.dueDate).toLocaleDateString()}
+          </Typography>
+        )}
+        {task.createdAt && (
+          <Typography
+            variant="body2"
+            sx={{ color: "secondary.main", fontWeight: 600 }}
+          >
+            Created on: {new Date(task.createdAt).toLocaleDateString()}
+          </Typography>
+        )}
+        {!showUpdateForm && (
+          <Button
+            sx={{
+              color: "primary.contrastText",
+              backgroundColor: "secondary.main",
+              alignSelf: "flex-end",
+            }}
+            onClick={() => {
+              setShowUpdateForm(true);
+            }}
+          >
+            Update
+          </Button>
+        )}
+      </InlineContainer>
       <Collapse in={showUpdateForm} timeout="auto" unmountOnExit>
         <UpdateTaskForm
           task={task}
@@ -88,7 +91,7 @@ const TaskItem = ({
           setShowUpdateForm={setShowUpdateForm}
         />
       </Collapse>
-    </InlineContainer>
+    </Card>
   );
 };
 

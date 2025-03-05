@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, styled } from "@mui/material";
 import InlineContainer from "../components/InlineContainer";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import { useContext, useState } from "react";
@@ -13,6 +13,25 @@ import IconContainer from "../components/IconContainer";
 import TaskerIcon from "@mui/icons-material/AssignmentRounded";
 import ProjectIcon from "@mui/icons-material/AccountTreeRounded";
 import ClosedProjectList from "./ClosedProjectList";
+
+const PrimaryNavigationContainer = styled(Box)(({ theme }) => ({
+  position: "fixed",
+  left: 0,
+  backgroundColor: theme.palette.background.paper,
+  height: "100vh",
+  padding: theme.spacing(2),
+
+  [theme.breakpoints.up("md")]: {
+    width: "20%",
+  },
+  [theme.breakpoints.down("md")]: {
+    width: "15%",
+  },
+  [theme.breakpoints.down("sm")]: {
+    width: "10%",
+    padding: ".5rem",
+  },
+}));
 
 const PrimaryNavigation = () => {
   const [showForm, setShowForm] = useState(false);
@@ -30,16 +49,7 @@ const PrimaryNavigation = () => {
     setShowForm(false);
   };
   return (
-    <Box
-      sx={{
-        position: "fixed",
-        left: 0,
-        backgroundColor: "background.paper",
-        height: "100vh",
-        width: "20%",
-        padding: "1rem",
-      }}
-    >
+    <PrimaryNavigationContainer>
       <InlineContainer
         sx={{
           width: "100%",
@@ -133,7 +143,7 @@ const PrimaryNavigation = () => {
         <PinnedProjectList />
         <ClosedProjectList />
       </Box>
-    </Box>
+    </PrimaryNavigationContainer>
   );
 };
 
