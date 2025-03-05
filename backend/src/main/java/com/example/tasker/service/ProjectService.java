@@ -35,6 +35,9 @@ public class ProjectService {
         if (projectDetails.getDescription() != null) {
             project.setDescription(projectDetails.getDescription());
         }
+        if (projectDetails.getDueDate() != null) {
+            project.setDueDate(projectDetails.getDueDate());
+        }
             project.setIsPinned(projectDetails.getIsPinned());
             project.setIsClosed(projectDetails.getIsClosed());
 

@@ -28,6 +28,9 @@ public class Project {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
+    @Column(nullable = true)
+    private LocalDateTime dueDate;
+
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> tasks;
 
@@ -59,12 +62,14 @@ public class Project {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    
     public LocalDateTime getCreatedAt() {return createdAt;}
     public void setCreatedAt(LocalDateTime createdAt) {this.createdAt = createdAt;}
 
     public LocalDateTime getUpdatedAt() {return updatedAt;}
     public void setUpdatedAt(LocalDateTime updatedAt) {this.updatedAt = updatedAt;}
+
+    public LocalDateTime getDueDate() {return dueDate;}
+    public void setDueDate(LocalDateTime dueDate) {this.dueDate = dueDate;}
 
     public List<Task> getTasks() {return tasks;}
 
