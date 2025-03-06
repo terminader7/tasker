@@ -26,8 +26,10 @@ const Chip = styled(MuiChip)(
   }
 
   &.active {
-    background: ${theme.palette.success.main};
-    color: ${theme.palette.success.contrastText};
+    background: ${theme.palette.common.white};
+    color: ${theme.palette.success.main};
+    border: 1px solid;
+    border-color: ${theme.palette.success.main}
   }
 
   &.completed {

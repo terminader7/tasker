@@ -86,6 +86,7 @@ const ProjectCard = ({
         padding: theme.spacing(2),
         justifyContent: showAsList ? "space-between" : "center",
         minHeight: showAsList ? "4rem" : "12rem",
+        alignItems: showAsList ? "center" : "default",
         position: "relative",
       }}
     >
@@ -101,26 +102,38 @@ const ProjectCard = ({
           </Typography>
           <StatusChip label={project.isClosed ? "closed" : "active"} />
         </Box>
-        {!project.isClosed && (
-          <Button
-            variant="outlined"
-            sx={{
-              color: project.isPinned ? "secondary.main" : "primary.main",
-              borderColor: project.isPinned ? "secondary.main" : "primary.main",
-            }}
-            onClick={() => {
-              handleUpdate(project.id, { isPinned: !project.isPinned });
-            }}
-          >
-            <PinIcon fontSize="small" />
-            {project.isPinned ? "Unpin" : "Pin"}
-          </Button>
-        )}
+        <Button
+          variant="outlined"
+          sx={{
+            color: project.isPinned ? "secondary.main" : "primary.main",
+            borderColor: project.isPinned ? "secondary.main" : "primary.main",
+            height: "2rem",
+          }}
+          onClick={() => {
+            handleUpdate(project.id, { isPinned: !project.isPinned });
+          }}
+          disabled={project.isClosed}
+          size="small"
+        >
+          <PinIcon fontSize="small" />
+          {project.isPinned ? "Unpin" : "Pin"}
+        </Button>
       </InlineContainer>
-      <LinearProgress
-        variant="determinate"
-        value={(completedTaskCount / project.tasks?.length) * 100}
-      />
+      <Box
+        sx={{
+          width: "100%",
+        }}
+      >
+        <Typography variant="body2">Progress</Typography>
+        <LinearProgress
+          variant="determinate"
+          value={
+            project?.tasks?.length
+              ? (completedTaskCount / project.tasks?.length) * 100
+              : 0
+          }
+        />
+      </Box>
       <InlineContainer sx={{ gap: "2rem", justifyContent: "center" }}>
         <Button
           variant="contained"
