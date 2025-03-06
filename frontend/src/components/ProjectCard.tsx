@@ -20,6 +20,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import UpdateProjectForm from "../features/UpdateProjectForm";
 import InlineContainer from "./InlineContainer";
 import StatusChip from "./StatusChip";
+import { useNavigate } from "react-router-dom";
 
 const ProjectCard = ({
   project,
@@ -32,6 +33,7 @@ const ProjectCard = ({
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const theme = useTheme();
+  const navigate = useNavigate();
 
   const handleUpdate = async (
     id: Project["id"],
@@ -76,6 +78,10 @@ const ProjectCard = ({
 
   const completedTaskCount = getProjectTasksCompleted[0];
 
+  const handleClick = () => {
+    navigate(`/${project.id}`);
+  };
+
   return (
     <Card
       sx={{
@@ -97,7 +103,19 @@ const ProjectCard = ({
         }}
       >
         <Box>
-          <Typography variant="h6" fontWeight={600}>
+          <Typography
+            variant="h6"
+            fontWeight={600}
+            sx={{
+              width: "fit-content",
+              ":hover": {
+                cursor: "pointer",
+                color: "primary.main",
+              },
+              transition: "0.2s",
+            }}
+            onClick={handleClick}
+          >
             {project?.title}
           </Typography>
           <StatusChip label={project.isClosed ? "closed" : "active"} />

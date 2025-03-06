@@ -83,7 +83,12 @@ const TaskList = () => {
 
   return (
     <PageContainer>
-      {project?.title && <Typography variant="h4">{project.title}</Typography>}
+      <Box>
+        {project?.title && (
+          <Typography variant="h4">{project.title}</Typography>
+        )}
+        <Typography variant="body1">{project?.description}</Typography>
+      </Box>
       <TaskCreator onTaskCreated={handleTaskCreated} />
       <List
         sx={{

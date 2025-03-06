@@ -69,7 +69,13 @@ const TaskCreator = ({
 
   return (
     <>
-      <TaskCreatorButton showForm={showForm} setShowForm={setShowForm} />
+      <TaskCreatorButton
+        showForm={showForm}
+        setShowForm={setShowForm}
+        sx={{
+          width: "10rem",
+        }}
+      />
       <Collapse in={showForm} timeout="auto" unmountOnExit>
         <TaskForm
           task={task}

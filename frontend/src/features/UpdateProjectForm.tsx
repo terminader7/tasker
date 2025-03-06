@@ -1,9 +1,11 @@
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import InlineContainer from "../components/InlineContainer";
 import { Project } from "../types/project";
 import IconContainer from "../components/IconContainer";
 import CloseIcon from "@mui/icons-material/Block";
+
+const characterLimit = 250;
 
 const UpdateProjectForm = ({
   project,
@@ -46,19 +48,50 @@ const UpdateProjectForm = ({
     setShowUpdateForm(false);
   };
 
-  console.log({ updatedProject });
   return (
-    <Box>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "1rem",
+      }}
+    >
       <TextField
         label="Title"
         value={updatedProject.title}
         onChange={(e) => handleInputChange("title", e.target.value)}
       />
-      <TextField
-        label="Description"
-        value={updatedProject.description}
-        onChange={(e) => handleInputChange("description", e.target.value)}
-      />
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <TextField
+          label="Description"
+          value={updatedProject.description}
+          multiline
+          rows={3}
+          onChange={(e) => {
+            if (e.target.value.length <= characterLimit) {
+              handleInputChange("description", e.target.value);
+            }
+          }}
+        />
+        <Typography
+          variant="body2"
+          sx={{
+            color:
+              (updatedProject?.description?.length ?? 0) > 200
+                ? "error.main"
+                : "grey.600",
+            display: "block",
+            textAlign: "right",
+          }}
+        >
+          {updatedProject?.description?.length ?? 0} / {characterLimit}
+        </Typography>
+      </Box>
       <Button
         variant="contained"
         sx={{

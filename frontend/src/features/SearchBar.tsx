@@ -2,12 +2,19 @@ import { Collapse, Typography, TextField, Box } from "@mui/material";
 import InlineContainer from "../components/InlineContainer";
 import SearchIcon from "@mui/icons-material/SearchRounded";
 import IconContainer from "../components/IconContainer";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { projectContext } from "../contexts/projectContext";
 
 const SearchBar = () => {
   const [showSearch, setShowSearch] = useState(false);
   const { searchQuery, setSearchQuery } = useContext(projectContext);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (showSearch && searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  }, [showSearch]);
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -42,6 +49,7 @@ const SearchBar = () => {
       </InlineContainer>
       <Collapse in={showSearch} timeout="auto" unmountOnExit>
         <TextField
+          inputRef={searchInputRef}
           placeholder="Search by Project..."
           variant="outlined"
           size="small"
@@ -53,7 +61,7 @@ const SearchBar = () => {
           onInput={(e) => {
             setSearchQuery((e.target as HTMLInputElement).value);
           }}
-        ></TextField>
+        />
       </Collapse>
     </Box>
   );
